@@ -475,6 +475,7 @@ public class LoanPaymentResponse : LoanPaymentRequest {
 
 public class CollateralRequest {
     public Guid Id { get; set; } = Guid.NewGuid();
+ public virtual string? CollateralIdentifier { get; set; } 
  public virtual Money? AppraisedValue { get; set; } 
  public virtual string? Description { get; set; } 
  public virtual Address? Location { get; set; } 
@@ -485,6 +486,7 @@ public class CollateralResponse : CollateralRequest {
     public static CollateralResponse FromModel(Collateral model) {
         return new CollateralResponse {
             Id = model.Id,
+            CollateralIdentifier = model.CollateralIdentifier,
             AppraisedValue = model.AppraisedValue,
             Description = model.Description,
             Location = model.Location,

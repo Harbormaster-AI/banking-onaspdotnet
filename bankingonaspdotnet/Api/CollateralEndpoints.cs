@@ -108,6 +108,7 @@ public static class CollateralEndpoints
         var model = new Collateral
         {
             Id = request.Id,
+            CollateralIdentifier = request.CollateralIdentifier,
             AppraisedValue = request.AppraisedValue,
             Description = request.Description,
             Location = request.Location,

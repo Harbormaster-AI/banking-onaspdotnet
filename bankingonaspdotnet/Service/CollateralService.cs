@@ -55,6 +55,7 @@ public class CollateralService : ICollateralService
             {
                 return false;
             }
+            existing.CollateralIdentifier = model.CollateralIdentifier;
             existing.AppraisedValue = model.AppraisedValue;
             existing.Description = model.Description;
             existing.Location = model.Location;
