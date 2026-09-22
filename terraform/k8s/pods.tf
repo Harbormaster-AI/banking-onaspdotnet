@@ -39,7 +39,7 @@ resource "kubernetes_replication_controller" "app-master" {
                     name  = "app-container"
 
                     port {
-                        container_port = 8080
+                        container_port = ${appPort}
                     }
                     env {
                         name  = "DATABASE_DIALECT"

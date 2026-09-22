@@ -11,32 +11,32 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-public DbSet<Bank> Banks => Set<Bank>();
-public DbSet<Branch> Branchs => Set<Branch>();
-public DbSet<ATM> ATMs => Set<ATM>();
-public DbSet<Customer> Customers => Set<Customer>();
-public DbSet<KycProfile> KycProfiles => Set<KycProfile>();
-public DbSet<IdentityDocument> IdentityDocuments => Set<IdentityDocument>();
-public DbSet<RiskAssessment> RiskAssessments => Set<RiskAssessment>();
-public DbSet<ScreeningResult> ScreeningResults => Set<ScreeningResult>();
-public DbSet<BankingProduct> BankingProducts => Set<BankingProduct>();
-public DbSet<Account> Accounts => Set<Account>();
-public DbSet<AccountStatement> AccountStatements => Set<AccountStatement>();
-public DbSet<Transaction> Transactions => Set<Transaction>();
-public DbSet<ExternalAccount> ExternalAccounts => Set<ExternalAccount>();
-public DbSet<FundsTransfer> FundsTransfers => Set<FundsTransfer>();
-public DbSet<StandingInstruction> StandingInstructions => Set<StandingInstruction>();
-public DbSet<PaymentCard> PaymentCards => Set<PaymentCard>();
-public DbSet<LoanAccount> LoanAccounts => Set<LoanAccount>();
-public DbSet<RepaymentSchedule> RepaymentSchedules => Set<RepaymentSchedule>();
-public DbSet<LoanPayment> LoanPayments => Set<LoanPayment>();
-public DbSet<Collateral> Collaterals => Set<Collateral>();
-public DbSet<FeeCharge> FeeCharges => Set<FeeCharge>();
-public DbSet<ExchangeRate> ExchangeRates => Set<ExchangeRate>();
-public DbSet<FXTrade> FXTrades => Set<FXTrade>();
-public DbSet<Dispute> Disputes => Set<Dispute>();
-public DbSet<Consent> Consents => Set<Consent>();
-public DbSet<ThirdPartyProvider> ThirdPartyProviders => Set<ThirdPartyProvider>();
+    public DbSet<Bank> Banks => Set<Bank>();
+    public DbSet<Branch> Branchs => Set<Branch>();
+    public DbSet<ATM> ATMs => Set<ATM>();
+    public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<KycProfile> KycProfiles => Set<KycProfile>();
+    public DbSet<IdentityDocument> IdentityDocuments => Set<IdentityDocument>();
+    public DbSet<RiskAssessment> RiskAssessments => Set<RiskAssessment>();
+    public DbSet<ScreeningResult> ScreeningResults => Set<ScreeningResult>();
+    public DbSet<BankingProduct> BankingProducts => Set<BankingProduct>();
+    public DbSet<Account> Accounts => Set<Account>();
+    public DbSet<AccountStatement> AccountStatements => Set<AccountStatement>();
+    public DbSet<Transaction> Transactions => Set<Transaction>();
+    public DbSet<ExternalAccount> ExternalAccounts => Set<ExternalAccount>();
+    public DbSet<FundsTransfer> FundsTransfers => Set<FundsTransfer>();
+    public DbSet<StandingInstruction> StandingInstructions => Set<StandingInstruction>();
+    public DbSet<PaymentCard> PaymentCards => Set<PaymentCard>();
+    public DbSet<LoanAccount> LoanAccounts => Set<LoanAccount>();
+    public DbSet<RepaymentSchedule> RepaymentSchedules => Set<RepaymentSchedule>();
+    public DbSet<LoanPayment> LoanPayments => Set<LoanPayment>();
+    public DbSet<Collateral> Collaterals => Set<Collateral>();
+    public DbSet<FeeCharge> FeeCharges => Set<FeeCharge>();
+    public DbSet<ExchangeRate> ExchangeRates => Set<ExchangeRate>();
+    public DbSet<FXTrade> FXTrades => Set<FXTrade>();
+    public DbSet<Dispute> Disputes => Set<Dispute>();
+    public DbSet<Consent> Consents => Set<Consent>();
+    public DbSet<ThirdPartyProvider> ThirdPartyProviders => Set<ThirdPartyProvider>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

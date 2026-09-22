@@ -10,7 +10,7 @@ resource "kubernetes_service" "app-master" {
         port {
             name        = "http"
             port        = 80
-            target_port = 8080
+            target_port = ${}appPort}
         }
 
         port {
