@@ -182,34 +182,6 @@ var app = builder.Build();
 
 app.MapPrometheusScrapingEndpoint();
 
-// apply the services
-    builder.Services.AddScoped<IBankService, BankService>();
-    builder.Services.AddScoped<IBranchService, BranchService>();
-    builder.Services.AddScoped<IATMService, ATMService>();
-    builder.Services.AddScoped<ICustomerService, CustomerService>();
-    builder.Services.AddScoped<IKycProfileService, KycProfileService>();
-    builder.Services.AddScoped<IIdentityDocumentService, IdentityDocumentService>();
-    builder.Services.AddScoped<IRiskAssessmentService, RiskAssessmentService>();
-    builder.Services.AddScoped<IScreeningResultService, ScreeningResultService>();
-    builder.Services.AddScoped<IBankingProductService, BankingProductService>();
-    builder.Services.AddScoped<IAccountService, AccountService>();
-    builder.Services.AddScoped<IAccountStatementService, AccountStatementService>();
-    builder.Services.AddScoped<ITransactionService, TransactionService>();
-    builder.Services.AddScoped<IExternalAccountService, ExternalAccountService>();
-    builder.Services.AddScoped<IFundsTransferService, FundsTransferService>();
-    builder.Services.AddScoped<IStandingInstructionService, StandingInstructionService>();
-    builder.Services.AddScoped<IPaymentCardService, PaymentCardService>();
-    builder.Services.AddScoped<ILoanAccountService, LoanAccountService>();
-    builder.Services.AddScoped<IRepaymentScheduleService, RepaymentScheduleService>();
-    builder.Services.AddScoped<ILoanPaymentService, LoanPaymentService>();
-    builder.Services.AddScoped<ICollateralService, CollateralService>();
-    builder.Services.AddScoped<IFeeChargeService, FeeChargeService>();
-    builder.Services.AddScoped<IExchangeRateService, ExchangeRateService>();
-    builder.Services.AddScoped<IFXTradeService, FXTradeService>();
-    builder.Services.AddScoped<IDisputeService, DisputeService>();
-    builder.Services.AddScoped<IConsentService, ConsentService>();
-    builder.Services.AddScoped<IThirdPartyProviderService, ThirdPartyProviderService>();
-
 // apply the service resolver
 builder.Services.AddScoped<IServiceResolver, ServiceResolver>();
 
