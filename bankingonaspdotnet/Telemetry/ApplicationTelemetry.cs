@@ -1,9 +1,9 @@
 using System;
-using System.Diagnostics.Metrics;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Threading.Tasks;
 
-namespace ${aib.getRootNamespace(true)}.Telemetry;
+namespace bankingonaspdotnet.Telemetry;
 
 public class ApplicationTelemetry
 {
