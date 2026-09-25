@@ -133,7 +133,7 @@ public class ScreeningResultService : IScreeningResultService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<KycProfileService>()).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get<KycProfileService>().Get(childRequest, cancellationToken);
             parent.KycProfile = child;
             Update( parent );
         }

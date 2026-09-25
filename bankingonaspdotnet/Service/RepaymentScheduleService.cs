@@ -138,7 +138,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<LoanAccountService>()).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
             Update( parent );
         }
@@ -191,7 +191,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<LoanPaymentService>()).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get<LoanPaymentService>().Get(childRequest, cancellationToken);
             parent.Payment = child;
             Update( parent );
         }

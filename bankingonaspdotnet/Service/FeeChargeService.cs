@@ -136,7 +136,7 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<AccountService>()).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
             Update( parent );
         }
@@ -189,7 +189,7 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<LoanAccountService>()).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
             Update( parent );
         }

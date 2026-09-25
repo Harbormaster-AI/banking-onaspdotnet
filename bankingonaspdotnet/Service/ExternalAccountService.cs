@@ -138,7 +138,7 @@ public class ExternalAccountService : IExternalAccountService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<CustomerService>()).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
             Update( parent );
         }
