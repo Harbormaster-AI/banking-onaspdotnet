@@ -60,14 +60,16 @@ public class LoanAccountService : ILoanAccountService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "LoanAccount",
                 "CreateLoanAccount",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -99,7 +101,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -128,7 +132,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -150,13 +156,15 @@ public class LoanAccountService : ILoanAccountService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(BankService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<BankService>).Get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -177,7 +185,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -199,13 +209,15 @@ public class LoanAccountService : ILoanAccountService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(BranchService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<BranchService>).Get( childRequest , cancellationToken );
             parent.Branch = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -226,7 +238,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -248,13 +262,15 @@ public class LoanAccountService : ILoanAccountService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(BankingProductService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<BankingProductService>).Get( childRequest , cancellationToken );
             parent.Product = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -275,7 +291,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -291,7 +309,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -306,7 +326,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -321,7 +343,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -336,7 +360,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -351,7 +377,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -366,7 +394,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -381,7 +411,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -396,7 +428,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -411,7 +445,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -426,7 +462,9 @@ public class LoanAccountService : ILoanAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

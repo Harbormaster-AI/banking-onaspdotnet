@@ -52,14 +52,16 @@ public class ConsentService : IConsentService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Consent",
                 "CreateConsent",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -83,7 +85,9 @@ public class ConsentService : IConsentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -112,7 +116,9 @@ public class ConsentService : IConsentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -134,13 +140,15 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(CustomerService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<CustomerService>).Get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -161,7 +169,9 @@ public class ConsentService : IConsentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -183,13 +193,15 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(BankService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<BankService>).Get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -210,7 +222,9 @@ public class ConsentService : IConsentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -232,13 +246,15 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(ThirdPartyProviderService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<ThirdPartyProviderService>).Get( childRequest , cancellationToken );
             parent.ThirdPartyProvider = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -259,7 +275,9 @@ public class ConsentService : IConsentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -275,7 +293,9 @@ public class ConsentService : IConsentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -290,7 +310,9 @@ public class ConsentService : IConsentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

@@ -48,14 +48,16 @@ public class LoanPaymentService : ILoanPaymentService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "LoanPayment",
                 "CreateLoanPayment",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -80,7 +82,9 @@ public class LoanPaymentService : ILoanPaymentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -109,7 +113,9 @@ public class LoanPaymentService : ILoanPaymentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -131,13 +137,15 @@ public class LoanPaymentService : ILoanPaymentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(LoanAccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<LoanAccountService>).Get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -158,7 +166,9 @@ public class LoanPaymentService : ILoanPaymentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -180,13 +190,15 @@ public class LoanPaymentService : ILoanPaymentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(TransactionService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<TransactionService>).Get( childRequest , cancellationToken );
             parent.Transaction = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -207,7 +219,9 @@ public class LoanPaymentService : ILoanPaymentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

@@ -52,14 +52,16 @@ public class DisputeService : IDisputeService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Dispute",
                 "CreateDispute",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -83,7 +85,9 @@ public class DisputeService : IDisputeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -112,7 +116,9 @@ public class DisputeService : IDisputeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -134,13 +140,15 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(TransactionService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<TransactionService>).Get( childRequest , cancellationToken );
             parent.Transaction = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -161,7 +169,9 @@ public class DisputeService : IDisputeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -183,13 +193,15 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(CustomerService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<CustomerService>).Get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -210,7 +222,9 @@ public class DisputeService : IDisputeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -232,13 +246,15 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -259,7 +275,9 @@ public class DisputeService : IDisputeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -281,13 +299,15 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(PaymentCardService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<PaymentCardService>).Get( childRequest , cancellationToken );
             parent.PaymentCard = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -308,7 +328,9 @@ public class DisputeService : IDisputeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

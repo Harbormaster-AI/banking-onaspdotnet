@@ -48,14 +48,16 @@ public class ExchangeRateService : IExchangeRateService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ExchangeRate",
                 "CreateExchangeRate",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -80,7 +82,9 @@ public class ExchangeRateService : IExchangeRateService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -109,7 +113,9 @@ public class ExchangeRateService : IExchangeRateService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -131,13 +137,15 @@ public class ExchangeRateService : IExchangeRateService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(BankService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<BankService>).Get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -158,7 +166,9 @@ public class ExchangeRateService : IExchangeRateService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -174,7 +184,9 @@ public class ExchangeRateService : IExchangeRateService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -189,7 +201,9 @@ public class ExchangeRateService : IExchangeRateService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

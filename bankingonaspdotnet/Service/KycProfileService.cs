@@ -52,14 +52,16 @@ public class KycProfileService : IKycProfileService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "KycProfile",
                 "CreateKycProfile",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -82,7 +84,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -111,7 +115,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -133,13 +139,15 @@ public class KycProfileService : IKycProfileService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(CustomerService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<CustomerService>).Get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -160,7 +168,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -176,7 +186,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -191,7 +203,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -206,7 +220,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -221,7 +237,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -236,7 +254,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -251,7 +271,9 @@ public class KycProfileService : IKycProfileService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

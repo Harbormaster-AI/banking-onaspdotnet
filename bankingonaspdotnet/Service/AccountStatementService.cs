@@ -46,14 +46,16 @@ public class AccountStatementService : IAccountStatementService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "AccountStatement",
                 "CreateAccountStatement",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -79,7 +81,9 @@ public class AccountStatementService : IAccountStatementService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -108,7 +112,9 @@ public class AccountStatementService : IAccountStatementService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -130,13 +136,15 @@ public class AccountStatementService : IAccountStatementService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -157,7 +165,9 @@ public class AccountStatementService : IAccountStatementService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

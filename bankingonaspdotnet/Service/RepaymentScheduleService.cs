@@ -48,14 +48,16 @@ public class RepaymentScheduleService : IRepaymentScheduleService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "RepaymentSchedule",
                 "CreateRepaymentSchedule",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -81,7 +83,9 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -110,7 +114,9 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -132,13 +138,15 @@ public class RepaymentScheduleService : IRepaymentScheduleService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(LoanAccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<LoanAccountService>).Get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -159,7 +167,9 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -181,13 +191,15 @@ public class RepaymentScheduleService : IRepaymentScheduleService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(LoanPaymentService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<LoanPaymentService>).Get( childRequest , cancellationToken );
             parent.Payment = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -208,7 +220,9 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

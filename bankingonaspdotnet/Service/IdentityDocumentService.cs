@@ -46,14 +46,16 @@ public class IdentityDocumentService : IIdentityDocumentService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "IdentityDocument",
                 "CreateIdentityDocument",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -77,7 +79,9 @@ public class IdentityDocumentService : IIdentityDocumentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -106,7 +110,9 @@ public class IdentityDocumentService : IIdentityDocumentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -128,13 +134,15 @@ public class IdentityDocumentService : IIdentityDocumentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(KycProfileService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<KycProfileService>).Get( childRequest , cancellationToken );
             parent.KycProfile = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -155,7 +163,9 @@ public class IdentityDocumentService : IIdentityDocumentService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

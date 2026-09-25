@@ -48,14 +48,16 @@ public class ExternalAccountService : IExternalAccountService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ExternalAccount",
                 "CreateExternalAccount",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -81,7 +83,9 @@ public class ExternalAccountService : IExternalAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -110,7 +114,9 @@ public class ExternalAccountService : IExternalAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -132,13 +138,15 @@ public class ExternalAccountService : IExternalAccountService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(CustomerService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<CustomerService>).Get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -159,7 +167,9 @@ public class ExternalAccountService : IExternalAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -175,7 +185,9 @@ public class ExternalAccountService : IExternalAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -190,7 +202,9 @@ public class ExternalAccountService : IExternalAccountService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

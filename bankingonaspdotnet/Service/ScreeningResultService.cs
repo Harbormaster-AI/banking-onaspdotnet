@@ -46,14 +46,16 @@ public class ScreeningResultService : IScreeningResultService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ScreeningResult",
                 "CreateScreeningResult",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -76,7 +78,9 @@ public class ScreeningResultService : IScreeningResultService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -105,7 +109,9 @@ public class ScreeningResultService : IScreeningResultService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -127,13 +133,15 @@ public class ScreeningResultService : IScreeningResultService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(KycProfileService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<KycProfileService>).Get( childRequest , cancellationToken );
             parent.KycProfile = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -154,7 +162,9 @@ public class ScreeningResultService : IScreeningResultService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

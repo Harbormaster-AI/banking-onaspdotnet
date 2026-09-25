@@ -46,14 +46,16 @@ public class ATMService : IATMService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ATM",
                 "CreateATM",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -76,7 +78,9 @@ public class ATMService : IATMService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -105,7 +109,9 @@ public class ATMService : IATMService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -127,13 +133,15 @@ public class ATMService : IATMService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(BranchService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<BranchService>).Get( childRequest , cancellationToken );
             parent.Branch = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -154,7 +162,9 @@ public class ATMService : IATMService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

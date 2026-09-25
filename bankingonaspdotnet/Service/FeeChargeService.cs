@@ -48,14 +48,16 @@ public class FeeChargeService : IFeeChargeService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "FeeCharge",
                 "CreateFeeCharge",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -79,7 +81,9 @@ public class FeeChargeService : IFeeChargeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -108,7 +112,9 @@ public class FeeChargeService : IFeeChargeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -130,13 +136,15 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -157,7 +165,9 @@ public class FeeChargeService : IFeeChargeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -179,13 +189,15 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(LoanAccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<LoanAccountService>).Get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -206,7 +218,9 @@ public class FeeChargeService : IFeeChargeService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

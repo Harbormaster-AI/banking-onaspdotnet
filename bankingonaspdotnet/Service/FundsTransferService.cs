@@ -54,14 +54,16 @@ public class FundsTransferService : IFundsTransferService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "FundsTransfer",
                 "CreateFundsTransfer",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -89,7 +91,9 @@ public class FundsTransferService : IFundsTransferService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -118,7 +122,9 @@ public class FundsTransferService : IFundsTransferService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -140,13 +146,15 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
             parent.SourceAccount = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -167,7 +175,9 @@ public class FundsTransferService : IFundsTransferService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -189,13 +199,15 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
             parent.DestinationAccount = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -216,7 +228,9 @@ public class FundsTransferService : IFundsTransferService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -238,13 +252,15 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(ExternalAccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<ExternalAccountService>).Get( childRequest , cancellationToken );
             parent.ExternalBeneficiary = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -265,7 +281,9 @@ public class FundsTransferService : IFundsTransferService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -287,13 +305,15 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(CustomerService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<CustomerService>).Get( childRequest , cancellationToken );
             parent.InitiatedBy = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -314,7 +334,9 @@ public class FundsTransferService : IFundsTransferService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -330,7 +352,9 @@ public class FundsTransferService : IFundsTransferService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -345,7 +369,9 @@ public class FundsTransferService : IFundsTransferService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

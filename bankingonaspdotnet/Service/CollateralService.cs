@@ -46,14 +46,16 @@ public class CollateralService : ICollateralService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Collateral",
                 "CreateCollateral",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -78,7 +80,9 @@ public class CollateralService : ICollateralService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -107,7 +111,9 @@ public class CollateralService : ICollateralService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -129,13 +135,15 @@ public class CollateralService : ICollateralService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(LoanAccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<LoanAccountService>).Get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -156,7 +164,9 @@ public class CollateralService : ICollateralService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

@@ -48,14 +48,16 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ThirdPartyProvider",
                 "CreateThirdPartyProvider",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -78,7 +80,9 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -107,7 +111,9 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -129,13 +135,15 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(BankService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<BankService>).Get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -156,7 +164,9 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -172,7 +182,9 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+           _logger.LogError(
+                   ex,
+                   "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -187,7 +199,9 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;

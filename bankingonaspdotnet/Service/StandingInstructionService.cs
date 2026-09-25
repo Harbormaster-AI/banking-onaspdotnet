@@ -48,14 +48,16 @@ public class StandingInstructionService : IStandingInstructionService
     {
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "StandingInstruction",
                 "CreateStandingInstruction",
                 () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
         }
     }
 
@@ -80,7 +82,9 @@ public class StandingInstructionService : IStandingInstructionService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -109,7 +113,9 @@ public class StandingInstructionService : IStandingInstructionService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -131,13 +137,15 @@ public class StandingInstructionService : IStandingInstructionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -158,7 +166,9 @@ public class StandingInstructionService : IStandingInstructionService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -180,13 +190,15 @@ public class StandingInstructionService : IStandingInstructionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(ExternalAccountService).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<ExternalAccountService>).Get( childRequest , cancellationToken );
             parent.Beneficiary = child;
             Update( parent );
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
@@ -207,7 +219,9 @@ public class StandingInstructionService : IStandingInstructionService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpected Error: {ex.Message}");
+            _logger.LogError(
+                    ex,
+                    "Unexpected error while creating Transaction.");
             return false;
         }
         return true;
