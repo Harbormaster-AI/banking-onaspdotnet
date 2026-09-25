@@ -2,5 +2,5 @@ namespace bankingonaspdotnet.Service;
 
 public interface IServiceResolver
 {
-    T Get<T>();
+    T Get<T>() where T : notnull;
 }

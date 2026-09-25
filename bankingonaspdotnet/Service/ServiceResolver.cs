@@ -12,7 +12,7 @@ public class ServiceResolver : IServiceResolver
         this.serviceProvider = serviceProvider;
     }
 
-    public T Get<T>()
+    public T Get<T>() where T : notnull
     {
         return serviceProvider.GetRequiredService<T>();
     }
