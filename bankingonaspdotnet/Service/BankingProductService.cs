@@ -109,7 +109,7 @@ public class BankingProductService : IBankingProductService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "BankingProduct",
                 "UpdateBankingProduct",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -140,7 +140,7 @@ public class BankingProductService : IBankingProductService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
             Update( parent );
         }

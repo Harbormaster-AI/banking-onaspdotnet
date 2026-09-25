@@ -107,7 +107,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "RepaymentSchedule",
                 "UpdateRepaymentSchedule",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -138,7 +138,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
             Update( parent );
         }
@@ -191,7 +191,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<LoanPaymentService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<LoanPaymentService>().Get(childRequest, cancellationToken);
             parent.Payment = child;
             Update( parent );
         }

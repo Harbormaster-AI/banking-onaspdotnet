@@ -109,7 +109,7 @@ public class DisputeService : IDisputeService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Dispute",
                 "UpdateDispute",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -140,7 +140,7 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<TransactionService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<TransactionService>().Get(childRequest, cancellationToken);
             parent.Transaction = child;
             Update( parent );
         }
@@ -193,7 +193,7 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
             Update( parent );
         }
@@ -246,7 +246,7 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
             Update( parent );
         }
@@ -299,7 +299,7 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<PaymentCardService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<PaymentCardService>().Get(childRequest, cancellationToken);
             parent.PaymentCard = child;
             Update( parent );
         }

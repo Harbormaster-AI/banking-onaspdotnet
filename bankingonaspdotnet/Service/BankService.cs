@@ -120,7 +120,7 @@ public class BankService : IBankService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Bank",
                 "UpdateBank",
                 () => _repository.DeleteAsync(existing, cancellationToken));

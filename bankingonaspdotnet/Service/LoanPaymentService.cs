@@ -106,7 +106,7 @@ public class LoanPaymentService : ILoanPaymentService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "LoanPayment",
                 "UpdateLoanPayment",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -137,7 +137,7 @@ public class LoanPaymentService : ILoanPaymentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
             Update( parent );
         }
@@ -190,7 +190,7 @@ public class LoanPaymentService : ILoanPaymentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<TransactionService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<TransactionService>().Get(childRequest, cancellationToken);
             parent.Transaction = child;
             Update( parent );
         }

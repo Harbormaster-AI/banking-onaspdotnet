@@ -105,7 +105,7 @@ public class FeeChargeService : IFeeChargeService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "FeeCharge",
                 "UpdateFeeCharge",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -136,7 +136,7 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
             Update( parent );
         }
@@ -189,7 +189,7 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
             Update( parent );
         }

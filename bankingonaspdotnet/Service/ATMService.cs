@@ -102,7 +102,7 @@ public class ATMService : IATMService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ATM",
                 "UpdateATM",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -133,7 +133,7 @@ public class ATMService : IATMService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<BranchService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<BranchService>().Get(childRequest, cancellationToken);
             parent.Branch = child;
             Update( parent );
         }

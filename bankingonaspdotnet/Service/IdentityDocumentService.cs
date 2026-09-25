@@ -103,7 +103,7 @@ public class IdentityDocumentService : IIdentityDocumentService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "IdentityDocument",
                 "UpdateIdentityDocument",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -134,7 +134,7 @@ public class IdentityDocumentService : IIdentityDocumentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<KycProfileService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<KycProfileService>().Get(childRequest, cancellationToken);
             parent.KycProfile = child;
             Update( parent );
         }

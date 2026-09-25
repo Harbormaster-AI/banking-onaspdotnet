@@ -105,7 +105,7 @@ public class AccountStatementService : IAccountStatementService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "AccountStatement",
                 "UpdateAccountStatement",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -136,7 +136,7 @@ public class AccountStatementService : IAccountStatementService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
             Update( parent );
         }

@@ -125,7 +125,7 @@ public class LoanAccountService : ILoanAccountService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "LoanAccount",
                 "UpdateLoanAccount",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -156,7 +156,7 @@ public class LoanAccountService : ILoanAccountService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
             Update( parent );
         }
@@ -209,7 +209,7 @@ public class LoanAccountService : ILoanAccountService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<BranchService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<BranchService>().Get(childRequest, cancellationToken);
             parent.Branch = child;
             Update( parent );
         }
@@ -262,7 +262,7 @@ public class LoanAccountService : ILoanAccountService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<BankingProductService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<BankingProductService>().Get(childRequest, cancellationToken);
             parent.Product = child;
             Update( parent );
         }

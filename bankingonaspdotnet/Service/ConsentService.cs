@@ -109,7 +109,7 @@ public class ConsentService : IConsentService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Consent",
                 "UpdateConsent",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -140,7 +140,7 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
             Update( parent );
         }
@@ -193,7 +193,7 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
             Update( parent );
         }
@@ -246,7 +246,7 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<ThirdPartyProviderService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<ThirdPartyProviderService>().Get(childRequest, cancellationToken);
             parent.ThirdPartyProvider = child;
             Update( parent );
         }

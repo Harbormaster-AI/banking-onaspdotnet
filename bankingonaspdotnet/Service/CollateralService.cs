@@ -104,7 +104,7 @@ public class CollateralService : ICollateralService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Collateral",
                 "UpdateCollateral",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -135,7 +135,7 @@ public class CollateralService : ICollateralService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
             Update( parent );
         }

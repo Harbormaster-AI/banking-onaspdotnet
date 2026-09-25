@@ -112,7 +112,7 @@ public class PaymentCardService : IPaymentCardService
 
         try
         {
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "PaymentCard",
                 "UpdatePaymentCard",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -143,7 +143,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
             Update( parent );
         }
@@ -196,7 +196,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
             Update( parent );
         }
@@ -249,7 +249,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
+            var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
             Update( parent );
         }
