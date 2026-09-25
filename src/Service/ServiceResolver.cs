@@ -1,6 +1,8 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
+namespace bankingonaspdotnet.Service;
+
 public class ServiceResolver : IServiceResolver
 {
     private readonly IServiceProvider serviceProvider;

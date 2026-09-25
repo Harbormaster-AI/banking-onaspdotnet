@@ -1,5 +1,7 @@
 
+using bankingonaspdotnet.Contracts;
 using bankingonaspdotnet.Domain;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace bankingonaspdotnet.Persistence;
