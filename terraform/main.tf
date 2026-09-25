@@ -12,7 +12,7 @@ provider "aws" {
       CreatedBy = "Harbormaster"
       Blueprint = "ASP.NET-10"
       DomainModel = "Banking Industry Domain Model"
-      CertificationId = "afa1bc11-f9b0-4ab2-9ddd-b5ed4f5fe43b"
+      CertificationId = "5d892ed2-65d4-4422-abb1-bb4c2d49cc2e"
     }
   }
 }
@@ -39,7 +39,7 @@ resource "local_file" "private_key_pem" {
 }
 
 resource "aws_key_pair" "generated" {
-  key_name   = "pjsk-sshtest-0.48128022206418697"
+  key_name   = "pjsk-sshtest-0.365721192269581"
   public_key = tls_private_key.generated.public_key_openssh
 
   lifecycle {
