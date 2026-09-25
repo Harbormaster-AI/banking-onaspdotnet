@@ -13,7 +13,6 @@ public interface IDisputeService {
     Task<Dispute?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<Dispute>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -124,7 +123,7 @@ public class DisputeService : IDisputeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Dispute found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Dispute found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -151,7 +150,7 @@ public class DisputeService : IDisputeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Dispute found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Dispute found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -173,7 +172,7 @@ public class DisputeService : IDisputeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Dispute found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Dispute found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -200,7 +199,7 @@ public class DisputeService : IDisputeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Dispute found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Dispute found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -222,7 +221,7 @@ public class DisputeService : IDisputeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Dispute found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Dispute found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -249,7 +248,7 @@ public class DisputeService : IDisputeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Dispute found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Dispute found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -271,7 +270,7 @@ public class DisputeService : IDisputeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Dispute found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Dispute found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -298,7 +297,7 @@ public class DisputeService : IDisputeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Dispute found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Dispute found using Id {ParentId}", request.ParentId);
             return false;
         }
 

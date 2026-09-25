@@ -13,7 +13,6 @@ public interface IPaymentCardService {
     Task<PaymentCard?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<PaymentCard>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -127,7 +126,7 @@ public class PaymentCardService : IPaymentCardService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No PaymentCard found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No PaymentCard found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -154,7 +153,7 @@ public class PaymentCardService : IPaymentCardService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No PaymentCard found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No PaymentCard found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -176,7 +175,7 @@ public class PaymentCardService : IPaymentCardService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No PaymentCard found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No PaymentCard found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -203,7 +202,7 @@ public class PaymentCardService : IPaymentCardService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No PaymentCard found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No PaymentCard found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -225,7 +224,7 @@ public class PaymentCardService : IPaymentCardService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No PaymentCard found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No PaymentCard found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -252,7 +251,7 @@ public class PaymentCardService : IPaymentCardService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No PaymentCard found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No PaymentCard found using Id {ParentId}", request.ParentId);
             return false;
         }
 

@@ -9,4 +9,8 @@ public interface IConsentRepository
     Task AddAsync(Consent consent, CancellationToken cancellationToken);
     Task UpdateAsync(Consent consent, CancellationToken cancellationToken);
     Task DeleteAsync(Consent consent, CancellationToken cancellationToken);
+
+    Task AddToAuthorizedAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken);
+    Task RemoveFromAuthorizedAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken);
+
 }

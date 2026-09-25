@@ -54,7 +54,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task AddToOwnersAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Owners
+        await _db.Owners
             .Where(customer => request.ChildIds.Contains(customer.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -64,7 +64,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task RemoveFromOwnersAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Owners
+        await _db.Owners
             .Where(customer =>
                 request.ChildIds.Contains(customer.Id) &&
                 customer.Owners_Id == request.ParentId)
@@ -76,7 +76,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task AddToTransactionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Transactions
+        await _db.Transactions
             .Where(transaction => request.ChildIds.Contains(transaction.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -86,7 +86,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task RemoveFromTransactionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Transactions
+        await _db.Transactions
             .Where(transaction =>
                 request.ChildIds.Contains(transaction.Id) &&
                 transaction.Transactions_Id == request.ParentId)
@@ -98,7 +98,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task AddToStatementsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Statements
+        await _db.Statements
             .Where(accountStatement => request.ChildIds.Contains(accountStatement.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -108,7 +108,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task RemoveFromStatementsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Statements
+        await _db.Statements
             .Where(accountStatement =>
                 request.ChildIds.Contains(accountStatement.Id) &&
                 accountStatement.Statements_Id == request.ParentId)
@@ -120,7 +120,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task AddToStandingInstructionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.StandingInstructions
+        await _db.StandingInstructions
             .Where(standingInstruction => request.ChildIds.Contains(standingInstruction.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -130,7 +130,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task RemoveFromStandingInstructionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.StandingInstructions
+        await _db.StandingInstructions
             .Where(standingInstruction =>
                 request.ChildIds.Contains(standingInstruction.Id) &&
                 standingInstruction.StandingInstructions_Id == request.ParentId)
@@ -142,7 +142,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task AddToFeeChargesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.FeeCharges
+        await _db.FeeCharges
             .Where(feeCharge => request.ChildIds.Contains(feeCharge.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -152,7 +152,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task RemoveFromFeeChargesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.FeeCharges
+        await _db.FeeCharges
             .Where(feeCharge =>
                 request.ChildIds.Contains(feeCharge.Id) &&
                 feeCharge.FeeCharges_Id == request.ParentId)

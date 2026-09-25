@@ -9,4 +9,6 @@ public interface IFXTradeRepository
     Task AddAsync(FXTrade fXTrade, CancellationToken cancellationToken);
     Task UpdateAsync(FXTrade fXTrade, CancellationToken cancellationToken);
     Task DeleteAsync(FXTrade fXTrade, CancellationToken cancellationToken);
+
+
 }

@@ -48,7 +48,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToBranchesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Branches
+        await _db.Branches
             .Where(branch => request.ChildIds.Contains(branch.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -58,7 +58,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromBranchesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Branches
+        await _db.Branches
             .Where(branch =>
                 request.ChildIds.Contains(branch.Id) &&
                 branch.Branches_Id == request.ParentId)
@@ -70,7 +70,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToProductsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Products
+        await _db.Products
             .Where(bankingProduct => request.ChildIds.Contains(bankingProduct.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -80,7 +80,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromProductsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Products
+        await _db.Products
             .Where(bankingProduct =>
                 request.ChildIds.Contains(bankingProduct.Id) &&
                 bankingProduct.Products_Id == request.ParentId)
@@ -92,7 +92,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToCustomersAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Customers
+        await _db.Customers
             .Where(customer => request.ChildIds.Contains(customer.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -102,7 +102,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromCustomersAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Customers
+        await _db.Customers
             .Where(customer =>
                 request.ChildIds.Contains(customer.Id) &&
                 customer.Customers_Id == request.ParentId)
@@ -114,7 +114,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Accounts
+        await _db.Accounts
             .Where(account => request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -124,7 +124,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Accounts
+        await _db.Accounts
             .Where(account =>
                 request.ChildIds.Contains(account.Id) &&
                 account.Accounts_Id == request.ParentId)
@@ -136,7 +136,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToPaymentCardsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.PaymentCards
+        await _db.PaymentCards
             .Where(paymentCard => request.ChildIds.Contains(paymentCard.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -146,7 +146,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromPaymentCardsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.PaymentCards
+        await _db.PaymentCards
             .Where(paymentCard =>
                 request.ChildIds.Contains(paymentCard.Id) &&
                 paymentCard.PaymentCards_Id == request.ParentId)
@@ -158,7 +158,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToLoanAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.LoanAccounts
+        await _db.LoanAccounts
             .Where(loanAccount => request.ChildIds.Contains(loanAccount.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -168,7 +168,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromLoanAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.LoanAccounts
+        await _db.LoanAccounts
             .Where(loanAccount =>
                 request.ChildIds.Contains(loanAccount.Id) &&
                 loanAccount.LoanAccounts_Id == request.ParentId)
@@ -180,7 +180,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToExchangeRatesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.ExchangeRates
+        await _db.ExchangeRates
             .Where(exchangeRate => request.ChildIds.Contains(exchangeRate.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -190,7 +190,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromExchangeRatesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.ExchangeRates
+        await _db.ExchangeRates
             .Where(exchangeRate =>
                 request.ChildIds.Contains(exchangeRate.Id) &&
                 exchangeRate.ExchangeRates_Id == request.ParentId)
@@ -202,7 +202,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToConsentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Consents
+        await _db.Consents
             .Where(consent => request.ChildIds.Contains(consent.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -212,7 +212,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromConsentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Consents
+        await _db.Consents
             .Where(consent =>
                 request.ChildIds.Contains(consent.Id) &&
                 consent.Consents_Id == request.ParentId)
@@ -224,7 +224,7 @@ public class BankRepository : IBankRepository
 
     public async Task AddToThirdPartyProvidersAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.ThirdPartyProviders
+        await _db.ThirdPartyProviders
             .Where(thirdPartyProvider => request.ChildIds.Contains(thirdPartyProvider.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -234,7 +234,7 @@ public class BankRepository : IBankRepository
 
     public async Task RemoveFromThirdPartyProvidersAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.ThirdPartyProviders
+        await _db.ThirdPartyProviders
             .Where(thirdPartyProvider =>
                 request.ChildIds.Contains(thirdPartyProvider.Id) &&
                 thirdPartyProvider.ThirdPartyProviders_Id == request.ParentId)

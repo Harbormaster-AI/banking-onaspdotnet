@@ -9,4 +9,6 @@ public interface IFeeChargeRepository
     Task AddAsync(FeeCharge feeCharge, CancellationToken cancellationToken);
     Task UpdateAsync(FeeCharge feeCharge, CancellationToken cancellationToken);
     Task DeleteAsync(FeeCharge feeCharge, CancellationToken cancellationToken);
+
+
 }

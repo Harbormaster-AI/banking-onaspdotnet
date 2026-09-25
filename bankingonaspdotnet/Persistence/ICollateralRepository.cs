@@ -9,4 +9,6 @@ public interface ICollateralRepository
     Task AddAsync(Collateral collateral, CancellationToken cancellationToken);
     Task UpdateAsync(Collateral collateral, CancellationToken cancellationToken);
     Task DeleteAsync(Collateral collateral, CancellationToken cancellationToken);
+
+
 }

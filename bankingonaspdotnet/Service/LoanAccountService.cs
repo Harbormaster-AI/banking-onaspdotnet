@@ -13,7 +13,6 @@ public interface ILoanAccountService {
     Task<LoanAccount?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<LoanAccount>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -140,7 +139,7 @@ public class LoanAccountService : ILoanAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanAccount found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanAccount found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -167,7 +166,7 @@ public class LoanAccountService : ILoanAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanAccount found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanAccount found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -189,7 +188,7 @@ public class LoanAccountService : ILoanAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanAccount found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanAccount found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -216,7 +215,7 @@ public class LoanAccountService : ILoanAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanAccount found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanAccount found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -238,7 +237,7 @@ public class LoanAccountService : ILoanAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanAccount found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanAccount found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -265,7 +264,7 @@ public class LoanAccountService : ILoanAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanAccount found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanAccount found using Id {ParentId}", request.ParentId);
             return false;
         }
 

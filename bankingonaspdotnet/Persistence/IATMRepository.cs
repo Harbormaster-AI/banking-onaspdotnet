@@ -9,4 +9,6 @@ public interface IATMRepository
     Task AddAsync(ATM aTM, CancellationToken cancellationToken);
     Task UpdateAsync(ATM aTM, CancellationToken cancellationToken);
     Task DeleteAsync(ATM aTM, CancellationToken cancellationToken);
+
+
 }

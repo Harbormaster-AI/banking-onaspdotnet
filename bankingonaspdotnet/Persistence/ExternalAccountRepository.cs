@@ -50,7 +50,7 @@ public class ExternalAccountRepository : IExternalAccountRepository
 
     public async Task AddToTransactionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Transactions
+        await _db.Transactions
             .Where(transaction => request.ChildIds.Contains(transaction.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -60,7 +60,7 @@ public class ExternalAccountRepository : IExternalAccountRepository
 
     public async Task RemoveFromTransactionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Transactions
+        await _db.Transactions
             .Where(transaction =>
                 request.ChildIds.Contains(transaction.Id) &&
                 transaction.Transactions_Id == request.ParentId)

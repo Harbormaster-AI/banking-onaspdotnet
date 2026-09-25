@@ -13,7 +13,6 @@ public interface IFundsTransferService {
     Task<FundsTransfer?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<FundsTransfer>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -130,7 +129,7 @@ public class FundsTransferService : IFundsTransferService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FundsTransfer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FundsTransfer found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -157,7 +156,7 @@ public class FundsTransferService : IFundsTransferService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FundsTransfer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FundsTransfer found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -179,7 +178,7 @@ public class FundsTransferService : IFundsTransferService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FundsTransfer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FundsTransfer found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -206,7 +205,7 @@ public class FundsTransferService : IFundsTransferService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FundsTransfer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FundsTransfer found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -228,7 +227,7 @@ public class FundsTransferService : IFundsTransferService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FundsTransfer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FundsTransfer found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -255,7 +254,7 @@ public class FundsTransferService : IFundsTransferService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FundsTransfer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FundsTransfer found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -277,7 +276,7 @@ public class FundsTransferService : IFundsTransferService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FundsTransfer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FundsTransfer found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -304,7 +303,7 @@ public class FundsTransferService : IFundsTransferService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FundsTransfer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FundsTransfer found using Id {ParentId}", request.ParentId);
             return false;
         }
 

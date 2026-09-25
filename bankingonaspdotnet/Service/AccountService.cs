@@ -13,7 +13,6 @@ public interface IAccountService {
     Task<Account?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<Account>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -137,7 +136,7 @@ public class AccountService : IAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Account found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Account found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -164,7 +163,7 @@ public class AccountService : IAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Account found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Account found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -186,7 +185,7 @@ public class AccountService : IAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Account found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Account found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -213,7 +212,7 @@ public class AccountService : IAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Account found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Account found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -235,7 +234,7 @@ public class AccountService : IAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Account found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Account found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -262,7 +261,7 @@ public class AccountService : IAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Account found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Account found using Id {ParentId}", request.ParentId);
             return false;
         }
 

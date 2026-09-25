@@ -13,7 +13,6 @@ public interface IScreeningResultService {
     Task<ScreeningResult?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<ScreeningResult>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -117,7 +116,7 @@ public class ScreeningResultService : IScreeningResultService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No ScreeningResult found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No ScreeningResult found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -144,7 +143,7 @@ public class ScreeningResultService : IScreeningResultService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No ScreeningResult found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No ScreeningResult found using Id {ParentId}", request.ParentId);
             return false;
         }
 

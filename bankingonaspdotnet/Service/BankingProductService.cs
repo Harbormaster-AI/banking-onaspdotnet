@@ -13,7 +13,6 @@ public interface IBankingProductService {
     Task<BankingProduct?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<BankingProduct>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -124,7 +123,7 @@ public class BankingProductService : IBankingProductService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No BankingProduct found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No BankingProduct found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -151,7 +150,7 @@ public class BankingProductService : IBankingProductService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No BankingProduct found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No BankingProduct found using Id {ParentId}", request.ParentId);
             return false;
         }
 

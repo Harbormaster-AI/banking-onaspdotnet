@@ -54,7 +54,7 @@ public class ConsentRepository : IConsentRepository
 
     public async Task AddToAuthorizedAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.AuthorizedAccounts
+        await _db.AuthorizedAccounts
             .Where(account => request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -64,7 +64,7 @@ public class ConsentRepository : IConsentRepository
 
     public async Task RemoveFromAuthorizedAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.AuthorizedAccounts
+        await _db.AuthorizedAccounts
             .Where(account =>
                 request.ChildIds.Contains(account.Id) &&
                 account.AuthorizedAccounts_Id == request.ParentId)

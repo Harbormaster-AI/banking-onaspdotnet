@@ -50,7 +50,7 @@ public class ExchangeRateRepository : IExchangeRateRepository
 
     public async Task AddToFxTradesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.FxTrades
+        await _db.FxTrades
             .Where(fXTrade => request.ChildIds.Contains(fXTrade.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -60,7 +60,7 @@ public class ExchangeRateRepository : IExchangeRateRepository
 
     public async Task RemoveFromFxTradesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.FxTrades
+        await _db.FxTrades
             .Where(fXTrade =>
                 request.ChildIds.Contains(fXTrade.Id) &&
                 fXTrade.FxTrades_Id == request.ParentId)

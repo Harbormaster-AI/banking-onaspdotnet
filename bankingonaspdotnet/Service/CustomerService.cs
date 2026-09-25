@@ -13,7 +13,6 @@ public interface ICustomerService {
     Task<Customer?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<Customer>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -141,7 +140,7 @@ public class CustomerService : ICustomerService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Customer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Customer found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -168,7 +167,7 @@ public class CustomerService : ICustomerService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Customer found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Customer found using Id {ParentId}", request.ParentId);
             return false;
         }
 

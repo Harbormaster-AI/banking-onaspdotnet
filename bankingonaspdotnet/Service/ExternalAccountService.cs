@@ -13,7 +13,6 @@ public interface IExternalAccountService {
     Task<ExternalAccount?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<ExternalAccount>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -122,7 +121,7 @@ public class ExternalAccountService : IExternalAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No ExternalAccount found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No ExternalAccount found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -149,7 +148,7 @@ public class ExternalAccountService : IExternalAccountService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No ExternalAccount found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No ExternalAccount found using Id {ParentId}", request.ParentId);
             return false;
         }
 

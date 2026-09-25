@@ -13,7 +13,6 @@ public interface IIdentityDocumentService {
     Task<IdentityDocument?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<IdentityDocument>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -118,7 +117,7 @@ public class IdentityDocumentService : IIdentityDocumentService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No IdentityDocument found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No IdentityDocument found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -145,7 +144,7 @@ public class IdentityDocumentService : IIdentityDocumentService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No IdentityDocument found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No IdentityDocument found using Id {ParentId}", request.ParentId);
             return false;
         }
 

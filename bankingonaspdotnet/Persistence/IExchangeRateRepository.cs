@@ -9,4 +9,8 @@ public interface IExchangeRateRepository
     Task AddAsync(ExchangeRate exchangeRate, CancellationToken cancellationToken);
     Task UpdateAsync(ExchangeRate exchangeRate, CancellationToken cancellationToken);
     Task DeleteAsync(ExchangeRate exchangeRate, CancellationToken cancellationToken);
+
+    Task AddToFxTradesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken);
+    Task RemoveFromFxTradesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken);
+
 }

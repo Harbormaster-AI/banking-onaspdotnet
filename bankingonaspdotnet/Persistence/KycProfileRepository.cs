@@ -50,7 +50,7 @@ public class KycProfileRepository : IKycProfileRepository
 
     public async Task AddToIdentityDocumentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.IdentityDocuments
+        await _db.IdentityDocuments
             .Where(identityDocument => request.ChildIds.Contains(identityDocument.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -60,7 +60,7 @@ public class KycProfileRepository : IKycProfileRepository
 
     public async Task RemoveFromIdentityDocumentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.IdentityDocuments
+        await _db.IdentityDocuments
             .Where(identityDocument =>
                 request.ChildIds.Contains(identityDocument.Id) &&
                 identityDocument.IdentityDocuments_Id == request.ParentId)
@@ -72,7 +72,7 @@ public class KycProfileRepository : IKycProfileRepository
 
     public async Task AddToRiskAssessmentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.RiskAssessments
+        await _db.RiskAssessments
             .Where(riskAssessment => request.ChildIds.Contains(riskAssessment.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -82,7 +82,7 @@ public class KycProfileRepository : IKycProfileRepository
 
     public async Task RemoveFromRiskAssessmentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.RiskAssessments
+        await _db.RiskAssessments
             .Where(riskAssessment =>
                 request.ChildIds.Contains(riskAssessment.Id) &&
                 riskAssessment.RiskAssessments_Id == request.ParentId)
@@ -94,7 +94,7 @@ public class KycProfileRepository : IKycProfileRepository
 
     public async Task AddToScreeningsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Screenings
+        await _db.Screenings
             .Where(screeningResult => request.ChildIds.Contains(screeningResult.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -104,7 +104,7 @@ public class KycProfileRepository : IKycProfileRepository
 
     public async Task RemoveFromScreeningsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Screenings
+        await _db.Screenings
             .Where(screeningResult =>
                 request.ChildIds.Contains(screeningResult.Id) &&
                 screeningResult.Screenings_Id == request.ParentId)

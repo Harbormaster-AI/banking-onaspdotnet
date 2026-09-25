@@ -9,4 +9,6 @@ public interface ILoanPaymentRepository
     Task AddAsync(LoanPayment loanPayment, CancellationToken cancellationToken);
     Task UpdateAsync(LoanPayment loanPayment, CancellationToken cancellationToken);
     Task DeleteAsync(LoanPayment loanPayment, CancellationToken cancellationToken);
+
+
 }

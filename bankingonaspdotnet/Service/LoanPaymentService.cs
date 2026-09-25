@@ -13,7 +13,6 @@ public interface ILoanPaymentService {
     Task<LoanPayment?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<LoanPayment>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -121,7 +120,7 @@ public class LoanPaymentService : ILoanPaymentService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanPayment found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanPayment found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -148,7 +147,7 @@ public class LoanPaymentService : ILoanPaymentService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanPayment found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanPayment found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -170,7 +169,7 @@ public class LoanPaymentService : ILoanPaymentService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanPayment found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanPayment found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -197,7 +196,7 @@ public class LoanPaymentService : ILoanPaymentService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No LoanPayment found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No LoanPayment found using Id {ParentId}", request.ParentId);
             return false;
         }
 

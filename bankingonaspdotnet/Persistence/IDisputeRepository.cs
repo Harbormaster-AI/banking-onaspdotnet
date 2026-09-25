@@ -9,4 +9,6 @@ public interface IDisputeRepository
     Task AddAsync(Dispute dispute, CancellationToken cancellationToken);
     Task UpdateAsync(Dispute dispute, CancellationToken cancellationToken);
     Task DeleteAsync(Dispute dispute, CancellationToken cancellationToken);
+
+
 }

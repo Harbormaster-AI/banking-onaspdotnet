@@ -13,7 +13,6 @@ public interface IFXTradeService {
     Task<FXTrade?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<FXTrade>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -131,7 +130,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -158,7 +157,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -180,7 +179,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -207,7 +206,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -229,7 +228,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -256,7 +255,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -278,7 +277,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -305,7 +304,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -327,7 +326,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -354,7 +353,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -376,7 +375,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -403,7 +402,7 @@ public class FXTradeService : IFXTradeService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No FXTrade found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No FXTrade found using Id {ParentId}", request.ParentId);
             return false;
         }
 

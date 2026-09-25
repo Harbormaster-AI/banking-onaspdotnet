@@ -13,7 +13,6 @@ public interface IRepaymentScheduleService {
     Task<RepaymentSchedule?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<RepaymentSchedule>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -122,7 +121,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No RepaymentSchedule found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No RepaymentSchedule found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -149,7 +148,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No RepaymentSchedule found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No RepaymentSchedule found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -171,7 +170,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No RepaymentSchedule found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No RepaymentSchedule found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -198,7 +197,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No RepaymentSchedule found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No RepaymentSchedule found using Id {ParentId}", request.ParentId);
             return false;
         }
 

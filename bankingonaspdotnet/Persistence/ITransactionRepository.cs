@@ -9,4 +9,6 @@ public interface ITransactionRepository
     Task AddAsync(Transaction transaction, CancellationToken cancellationToken);
     Task UpdateAsync(Transaction transaction, CancellationToken cancellationToken);
     Task DeleteAsync(Transaction transaction, CancellationToken cancellationToken);
+
+
 }

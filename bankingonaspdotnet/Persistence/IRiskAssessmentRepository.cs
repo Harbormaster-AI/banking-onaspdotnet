@@ -9,4 +9,6 @@ public interface IRiskAssessmentRepository
     Task AddAsync(RiskAssessment riskAssessment, CancellationToken cancellationToken);
     Task UpdateAsync(RiskAssessment riskAssessment, CancellationToken cancellationToken);
     Task DeleteAsync(RiskAssessment riskAssessment, CancellationToken cancellationToken);
+
+
 }

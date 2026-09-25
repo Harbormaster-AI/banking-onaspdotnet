@@ -13,7 +13,6 @@ public interface ITransactionService {
     Task<Transaction?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<Transaction>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -132,7 +131,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -159,7 +158,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -181,7 +180,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -208,7 +207,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -230,7 +229,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -257,7 +256,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -279,7 +278,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -306,7 +305,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -328,7 +327,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -355,7 +354,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -377,7 +376,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -404,7 +403,7 @@ public class TransactionService : ITransactionService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No Transaction found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No Transaction found using Id {ParentId}", request.ParentId);
             return false;
         }
 

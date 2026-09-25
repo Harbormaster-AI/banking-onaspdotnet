@@ -13,7 +13,6 @@ public interface IExchangeRateService {
     Task<ExchangeRate?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<ExchangeRate>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -121,7 +120,7 @@ public class ExchangeRateService : IExchangeRateService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No ExchangeRate found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No ExchangeRate found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -148,7 +147,7 @@ public class ExchangeRateService : IExchangeRateService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No ExchangeRate found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No ExchangeRate found using Id {ParentId}", request.ParentId);
             return false;
         }
 

@@ -9,4 +9,6 @@ public interface IStandingInstructionRepository
     Task AddAsync(StandingInstruction standingInstruction, CancellationToken cancellationToken);
     Task UpdateAsync(StandingInstruction standingInstruction, CancellationToken cancellationToken);
     Task DeleteAsync(StandingInstruction standingInstruction, CancellationToken cancellationToken);
+
+
 }

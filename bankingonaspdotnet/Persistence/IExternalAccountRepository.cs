@@ -9,4 +9,8 @@ public interface IExternalAccountRepository
     Task AddAsync(ExternalAccount externalAccount, CancellationToken cancellationToken);
     Task UpdateAsync(ExternalAccount externalAccount, CancellationToken cancellationToken);
     Task DeleteAsync(ExternalAccount externalAccount, CancellationToken cancellationToken);
+
+    Task AddToTransactionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken);
+    Task RemoveFromTransactionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken);
+
 }

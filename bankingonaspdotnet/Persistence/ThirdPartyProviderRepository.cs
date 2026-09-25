@@ -50,7 +50,7 @@ public class ThirdPartyProviderRepository : IThirdPartyProviderRepository
 
     public async Task AddToConsentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Consents
+        await _db.Consents
             .Where(consent => request.ChildIds.Contains(consent.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -60,7 +60,7 @@ public class ThirdPartyProviderRepository : IThirdPartyProviderRepository
 
     public async Task RemoveFromConsentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Consents
+        await _db.Consents
             .Where(consent =>
                 request.ChildIds.Contains(consent.Id) &&
                 consent.Consents_Id == request.ParentId)

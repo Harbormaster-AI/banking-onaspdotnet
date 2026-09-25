@@ -9,4 +9,6 @@ public interface IRepaymentScheduleRepository
     Task AddAsync(RepaymentSchedule repaymentSchedule, CancellationToken cancellationToken);
     Task UpdateAsync(RepaymentSchedule repaymentSchedule, CancellationToken cancellationToken);
     Task DeleteAsync(RepaymentSchedule repaymentSchedule, CancellationToken cancellationToken);
+
+
 }

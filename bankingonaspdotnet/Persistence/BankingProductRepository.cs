@@ -50,7 +50,7 @@ public class BankingProductRepository : IBankingProductRepository
 
     public async Task AddToAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Accounts
+        await _db.Accounts
             .Where(account => request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -60,7 +60,7 @@ public class BankingProductRepository : IBankingProductRepository
 
     public async Task RemoveFromAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.Accounts
+        await _db.Accounts
             .Where(account =>
                 request.ChildIds.Contains(account.Id) &&
                 account.Accounts_Id == request.ParentId)
@@ -72,7 +72,7 @@ public class BankingProductRepository : IBankingProductRepository
 
     public async Task AddToLoanAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.LoanAccounts
+        await _db.LoanAccounts
             .Where(loanAccount => request.ChildIds.Contains(loanAccount.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -82,7 +82,7 @@ public class BankingProductRepository : IBankingProductRepository
 
     public async Task RemoveFromLoanAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.LoanAccounts
+        await _db.LoanAccounts
             .Where(loanAccount =>
                 request.ChildIds.Contains(loanAccount.Id) &&
                 loanAccount.LoanAccounts_Id == request.ParentId)
@@ -94,7 +94,7 @@ public class BankingProductRepository : IBankingProductRepository
 
     public async Task AddToPaymentCardsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.PaymentCards
+        await _db.PaymentCards
             .Where(paymentCard => request.ChildIds.Contains(paymentCard.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
@@ -104,7 +104,7 @@ public class BankingProductRepository : IBankingProductRepository
 
     public async Task RemoveFromPaymentCardsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
     {
-        await _context.PaymentCards
+        await _db.PaymentCards
             .Where(paymentCard =>
                 request.ChildIds.Contains(paymentCard.Id) &&
                 paymentCard.PaymentCards_Id == request.ParentId)

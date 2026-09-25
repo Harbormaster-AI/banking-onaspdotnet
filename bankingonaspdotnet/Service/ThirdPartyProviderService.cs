@@ -13,7 +13,6 @@ public interface IThirdPartyProviderService {
     Task<ThirdPartyProvider?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<ThirdPartyProvider>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -119,7 +118,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No ThirdPartyProvider found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No ThirdPartyProvider found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -146,7 +145,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No ThirdPartyProvider found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No ThirdPartyProvider found using Id {ParentId}", request.ParentId);
             return false;
         }
 

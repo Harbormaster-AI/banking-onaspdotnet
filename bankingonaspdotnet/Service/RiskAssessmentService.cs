@@ -13,7 +13,6 @@ public interface IRiskAssessmentService {
     Task<RiskAssessment?> Get(IdentifierRequest identifier, CancellationToken cancellationToken);
     Task<IReadOnlyList<RiskAssessment>> GetAll(CancellationToken cancellationToken);
     Task<bool> Delete(IdentifierRequest identifier, CancellationToken cancellationToken);
-
     // ------------------------------
     // Single Associations
     // -------------------------------
@@ -117,7 +116,7 @@ public class RiskAssessmentService : IRiskAssessmentService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No RiskAssessment found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No RiskAssessment found using Id {ParentId}", request.ParentId);
             return false;
         }
 
@@ -144,7 +143,7 @@ public class RiskAssessmentService : IRiskAssessmentService
         var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
         if (parent is null)
         {
-            _logger.LogError($"No RiskAssessment found using Id {ParentId}", request.ParentId);
+            _logger.LogError("No RiskAssessment found using Id {ParentId}", request.ParentId);
             return false;
         }
 
