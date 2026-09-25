@@ -146,7 +146,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>()).Get( childRequest , cancellationToken );
             parent.SourceAccount = child;
             Update( parent );
         }
@@ -199,7 +199,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>()).Get( childRequest , cancellationToken );
             parent.DestinationAccount = child;
             Update( parent );
         }
@@ -252,7 +252,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<ExternalAccountService>).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<ExternalAccountService>()).Get( childRequest , cancellationToken );
             parent.ExternalBeneficiary = child;
             Update( parent );
         }
@@ -305,7 +305,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<CustomerService>).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<CustomerService>()).Get( childRequest , cancellationToken );
             parent.InitiatedBy = child;
             Update( parent );
         }

@@ -137,7 +137,7 @@ public class StandingInstructionService : IStandingInstructionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<AccountService>).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<AccountService>()).Get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -190,7 +190,7 @@ public class StandingInstructionService : IStandingInstructionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<ExternalAccountService>).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<ExternalAccountService>()).Get( childRequest , cancellationToken );
             parent.Beneficiary = child;
             Update( parent );
         }

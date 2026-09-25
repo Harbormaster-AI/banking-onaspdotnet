@@ -137,7 +137,7 @@ public class ExchangeRateService : IExchangeRateService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.Get(<BankService>).Get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(<BankService>()).Get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
