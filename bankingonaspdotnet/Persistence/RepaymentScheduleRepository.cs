@@ -46,4 +46,5 @@ public class RepaymentScheduleRepository : IRepaymentScheduleRepository
         _db.RepaymentSchedules.Remove(repaymentSchedule);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

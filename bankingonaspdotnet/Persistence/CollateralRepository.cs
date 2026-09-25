@@ -44,4 +44,5 @@ public class CollateralRepository : ICollateralRepository
         _db.Collaterals.Remove(collateral);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

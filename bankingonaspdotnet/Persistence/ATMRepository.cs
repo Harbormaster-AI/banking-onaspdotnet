@@ -44,4 +44,5 @@ public class ATMRepository : IATMRepository
         _db.ATMs.Remove(aTM);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

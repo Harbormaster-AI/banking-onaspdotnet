@@ -44,4 +44,5 @@ public class ScreeningResultRepository : IScreeningResultRepository
         _db.ScreeningResults.Remove(screeningResult);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

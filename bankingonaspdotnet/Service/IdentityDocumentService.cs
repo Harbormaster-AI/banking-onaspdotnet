@@ -1,6 +1,7 @@
 using bankingonaspdotnet.Domain;
 using bankingonaspdotnet.Persistence;
 using bankingonaspdotnet.Contracts;
+using bankingonaspdotnet.Telemetry;
 
 namespace bankingonaspdotnet.Service;
 
@@ -23,23 +24,32 @@ public interface IIdentityDocumentService {
 
 public class IdentityDocumentService : IIdentityDocumentService
 {
+    private readonly ApplicationTelemetry _telemetry;
     private readonly IIdentityDocumentRepository _repository;
     private readonly ILogger<IdentityDocumentService> _logger;
+    private readonly IServiceResolver _serviceResolver;
+
 
     public IdentityDocumentService(
-        IIdentityDocumentRepository repository, ILogger<IdentityDocumentService> logger )
+        ApplicationTelemetry telemetry,
+        IIdentityDocumentRepository repository,
+        ILogger<IdentityDocumentService> logger,
+        IServiceResolver serviceResolver)
     {
+        _telemetry = telemetry;
         _repository = repository;
         _logger = logger;
+        _serviceResolver = serviceResolver;
     }
-
 
     public async Task Create(IdentityDocument model, CancellationToken cancellationToken)
     {
-
-         try
+        try
         {
-            await _repository.AddAsync(model, cancellationToken);
+            return await telemetry.Execute(
+                "IdentityDocument",
+                "CreateIdentityDocument",
+                () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -60,7 +70,10 @@ public class IdentityDocumentService : IIdentityDocumentService
             existing.ExpirationDate = model.ExpirationDate;
             existing.DocumentType = model.DocumentType;
 
-            await _repository.UpdateAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "IdentityDocument",
+                "UpdateIdentityDocument",
+                () => _repository.UpdateAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -86,7 +99,10 @@ public class IdentityDocumentService : IIdentityDocumentService
 
         try
         {
-            await _repository.DeleteAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "IdentityDocument",
+                "UpdateIdentityDocument",
+                () => _repository.DeleteAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -94,13 +110,54 @@ public class IdentityDocumentService : IIdentityDocumentService
             return false;
         }
         return true;
-
     }
 
     public async Task<bool> AssignKycProfile(AssociationRequest request, CancellationToken cancellationToken) {
+
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No IdentityDocument found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            var childRequest = new IdentifierRequest
+            {
+                Id = request.ChildId;
+            };
+
+            var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken )
+            parent.KycProfile = child;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> UnassignKycProfile(AssociationRequest request, CancellationToken cancellationToken) {
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No IdentityDocument found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            parent.KycProfile = null;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 

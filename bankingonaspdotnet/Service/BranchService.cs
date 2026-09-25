@@ -1,6 +1,7 @@
 using bankingonaspdotnet.Domain;
 using bankingonaspdotnet.Persistence;
 using bankingonaspdotnet.Contracts;
+using bankingonaspdotnet.Telemetry;
 
 namespace bankingonaspdotnet.Service;
 
@@ -29,23 +30,32 @@ public interface IBranchService {
 
 public class BranchService : IBranchService
 {
+    private readonly ApplicationTelemetry _telemetry;
     private readonly IBranchRepository _repository;
     private readonly ILogger<BranchService> _logger;
+    private readonly IServiceResolver _serviceResolver;
+
 
     public BranchService(
-        IBranchRepository repository, ILogger<BranchService> logger )
+        ApplicationTelemetry telemetry,
+        IBranchRepository repository,
+        ILogger<BranchService> logger,
+        IServiceResolver serviceResolver)
     {
+        _telemetry = telemetry;
         _repository = repository;
         _logger = logger;
+        _serviceResolver = serviceResolver;
     }
-
 
     public async Task Create(Branch model, CancellationToken cancellationToken)
     {
-
-         try
+        try
         {
-            await _repository.AddAsync(model, cancellationToken);
+            return await telemetry.Execute(
+                "Branch",
+                "CreateBranch",
+                () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -67,7 +77,10 @@ public class BranchService : IBranchService
             existing.Phone = model.Phone;
             existing.OpeningHours = model.OpeningHours;
 
-            await _repository.UpdateAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "Branch",
+                "UpdateBranch",
+                () => _repository.UpdateAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -93,7 +106,10 @@ public class BranchService : IBranchService
 
         try
         {
-            await _repository.DeleteAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "Branch",
+                "UpdateBranch",
+                () => _repository.DeleteAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -101,35 +117,145 @@ public class BranchService : IBranchService
             return false;
         }
         return true;
-
     }
 
     public async Task<bool> AssignBank(AssociationRequest request, CancellationToken cancellationToken) {
+
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No Branch found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            var childRequest = new IdentifierRequest
+            {
+                Id = request.ChildId;
+            };
+
+            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken )
+            parent.Bank = child;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> UnassignBank(AssociationRequest request, CancellationToken cancellationToken) {
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No Branch found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            parent.Bank = null;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 
 
     public async Task<bool> AddToAccounts(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "Branch",
+                "AddToAccounts",
+                () => _repository.AddToAccountsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> RemoveFromAccounts(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "Branch",
+                "RemoveFromAccounts",
+                () => _repository.RemoveFromAccountsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 
     public async Task<bool> AddToLoanAccounts(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "Branch",
+                "AddToLoanAccounts",
+                () => _repository.AddToLoanAccountsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> RemoveFromLoanAccounts(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "Branch",
+                "RemoveFromLoanAccounts",
+                () => _repository.RemoveFromLoanAccountsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 
     public async Task<bool> AddToAtms(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "Branch",
+                "AddToAtms",
+                () => _repository.AddToAtmsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> RemoveFromAtms(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "Branch",
+                "RemoveFromAtms",
+                () => _repository.RemoveFromAtmsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 

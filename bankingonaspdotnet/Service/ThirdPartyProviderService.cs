@@ -1,6 +1,7 @@
 using bankingonaspdotnet.Domain;
 using bankingonaspdotnet.Persistence;
 using bankingonaspdotnet.Contracts;
+using bankingonaspdotnet.Telemetry;
 
 namespace bankingonaspdotnet.Service;
 
@@ -25,23 +26,32 @@ public interface IThirdPartyProviderService {
 
 public class ThirdPartyProviderService : IThirdPartyProviderService
 {
+    private readonly ApplicationTelemetry _telemetry;
     private readonly IThirdPartyProviderRepository _repository;
     private readonly ILogger<ThirdPartyProviderService> _logger;
+    private readonly IServiceResolver _serviceResolver;
+
 
     public ThirdPartyProviderService(
-        IThirdPartyProviderRepository repository, ILogger<ThirdPartyProviderService> logger )
+        ApplicationTelemetry telemetry,
+        IThirdPartyProviderRepository repository,
+        ILogger<ThirdPartyProviderService> logger,
+        IServiceResolver serviceResolver)
     {
+        _telemetry = telemetry;
         _repository = repository;
         _logger = logger;
+        _serviceResolver = serviceResolver;
     }
-
 
     public async Task Create(ThirdPartyProvider model, CancellationToken cancellationToken)
     {
-
-         try
+        try
         {
-            await _repository.AddAsync(model, cancellationToken);
+            return await telemetry.Execute(
+                "ThirdPartyProvider",
+                "CreateThirdPartyProvider",
+                () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -61,7 +71,10 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
             existing.RegistrationId = model.RegistrationId;
             existing.Website = model.Website;
 
-            await _repository.UpdateAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "ThirdPartyProvider",
+                "UpdateThirdPartyProvider",
+                () => _repository.UpdateAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -87,7 +100,10 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
 
         try
         {
-            await _repository.DeleteAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "ThirdPartyProvider",
+                "UpdateThirdPartyProvider",
+                () => _repository.DeleteAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -95,21 +111,85 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
             return false;
         }
         return true;
-
     }
 
     public async Task<bool> AssignBank(AssociationRequest request, CancellationToken cancellationToken) {
+
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No ThirdPartyProvider found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            var childRequest = new IdentifierRequest
+            {
+                Id = request.ChildId;
+            };
+
+            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken )
+            parent.Bank = child;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> UnassignBank(AssociationRequest request, CancellationToken cancellationToken) {
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No ThirdPartyProvider found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            parent.Bank = null;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 
 
     public async Task<bool> AddToConsents(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "ThirdPartyProvider",
+                "AddToConsents",
+                () => _repository.AddToConsentsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> RemoveFromConsents(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "ThirdPartyProvider",
+                "RemoveFromConsents",
+                () => _repository.RemoveFromConsentsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 

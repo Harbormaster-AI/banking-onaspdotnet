@@ -46,4 +46,5 @@ public class LoanPaymentRepository : ILoanPaymentRepository
         _db.LoanPayments.Remove(loanPayment);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

@@ -1,6 +1,7 @@
 using bankingonaspdotnet.Domain;
 using bankingonaspdotnet.Persistence;
 using bankingonaspdotnet.Contracts;
+using bankingonaspdotnet.Telemetry;
 
 namespace bankingonaspdotnet.Service;
 
@@ -23,23 +24,32 @@ public interface IRiskAssessmentService {
 
 public class RiskAssessmentService : IRiskAssessmentService
 {
+    private readonly ApplicationTelemetry _telemetry;
     private readonly IRiskAssessmentRepository _repository;
     private readonly ILogger<RiskAssessmentService> _logger;
+    private readonly IServiceResolver _serviceResolver;
+
 
     public RiskAssessmentService(
-        IRiskAssessmentRepository repository, ILogger<RiskAssessmentService> logger )
+        ApplicationTelemetry telemetry,
+        IRiskAssessmentRepository repository,
+        ILogger<RiskAssessmentService> logger,
+        IServiceResolver serviceResolver)
     {
+        _telemetry = telemetry;
         _repository = repository;
         _logger = logger;
+        _serviceResolver = serviceResolver;
     }
-
 
     public async Task Create(RiskAssessment model, CancellationToken cancellationToken)
     {
-
-         try
+        try
         {
-            await _repository.AddAsync(model, cancellationToken);
+            return await telemetry.Execute(
+                "RiskAssessment",
+                "CreateRiskAssessment",
+                () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -59,7 +69,10 @@ public class RiskAssessmentService : IRiskAssessmentService
             existing.AssessedOn = model.AssessedOn;
             existing.Rating = model.Rating;
 
-            await _repository.UpdateAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "RiskAssessment",
+                "UpdateRiskAssessment",
+                () => _repository.UpdateAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -85,7 +98,10 @@ public class RiskAssessmentService : IRiskAssessmentService
 
         try
         {
-            await _repository.DeleteAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "RiskAssessment",
+                "UpdateRiskAssessment",
+                () => _repository.DeleteAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -93,13 +109,54 @@ public class RiskAssessmentService : IRiskAssessmentService
             return false;
         }
         return true;
-
     }
 
     public async Task<bool> AssignKycProfile(AssociationRequest request, CancellationToken cancellationToken) {
+
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No RiskAssessment found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            var childRequest = new IdentifierRequest
+            {
+                Id = request.ChildId;
+            };
+
+            var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken )
+            parent.KycProfile = child;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> UnassignKycProfile(AssociationRequest request, CancellationToken cancellationToken) {
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No RiskAssessment found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            parent.KycProfile = null;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 

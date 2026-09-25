@@ -1,6 +1,7 @@
 using bankingonaspdotnet.Domain;
 using bankingonaspdotnet.Persistence;
 using bankingonaspdotnet.Contracts;
+using bankingonaspdotnet.Telemetry;
 
 namespace bankingonaspdotnet.Service;
 
@@ -29,23 +30,32 @@ public interface IBankingProductService {
 
 public class BankingProductService : IBankingProductService
 {
+    private readonly ApplicationTelemetry _telemetry;
     private readonly IBankingProductRepository _repository;
     private readonly ILogger<BankingProductService> _logger;
+    private readonly IServiceResolver _serviceResolver;
+
 
     public BankingProductService(
-        IBankingProductRepository repository, ILogger<BankingProductService> logger )
+        ApplicationTelemetry telemetry,
+        IBankingProductRepository repository,
+        ILogger<BankingProductService> logger,
+        IServiceResolver serviceResolver)
     {
+        _telemetry = telemetry;
         _repository = repository;
         _logger = logger;
+        _serviceResolver = serviceResolver;
     }
-
 
     public async Task Create(BankingProduct model, CancellationToken cancellationToken)
     {
-
-         try
+        try
         {
-            await _repository.AddAsync(model, cancellationToken);
+            return await telemetry.Execute(
+                "BankingProduct",
+                "CreateBankingProduct",
+                () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -66,7 +76,10 @@ public class BankingProductService : IBankingProductService
             existing.Description = model.Description;
             existing.ProductCategory = model.ProductCategory;
 
-            await _repository.UpdateAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "BankingProduct",
+                "UpdateBankingProduct",
+                () => _repository.UpdateAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -92,7 +105,10 @@ public class BankingProductService : IBankingProductService
 
         try
         {
-            await _repository.DeleteAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "BankingProduct",
+                "UpdateBankingProduct",
+                () => _repository.DeleteAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -100,35 +116,145 @@ public class BankingProductService : IBankingProductService
             return false;
         }
         return true;
-
     }
 
     public async Task<bool> AssignBank(AssociationRequest request, CancellationToken cancellationToken) {
+
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No BankingProduct found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            var childRequest = new IdentifierRequest
+            {
+                Id = request.ChildId;
+            };
+
+            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken )
+            parent.Bank = child;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> UnassignBank(AssociationRequest request, CancellationToken cancellationToken) {
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No BankingProduct found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            parent.Bank = null;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 
 
     public async Task<bool> AddToAccounts(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "BankingProduct",
+                "AddToAccounts",
+                () => _repository.AddToAccountsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> RemoveFromAccounts(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "BankingProduct",
+                "RemoveFromAccounts",
+                () => _repository.RemoveFromAccountsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 
     public async Task<bool> AddToLoanAccounts(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "BankingProduct",
+                "AddToLoanAccounts",
+                () => _repository.AddToLoanAccountsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> RemoveFromLoanAccounts(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "BankingProduct",
+                "RemoveFromLoanAccounts",
+                () => _repository.RemoveFromLoanAccountsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 
     public async Task<bool> AddToPaymentCards(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "BankingProduct",
+                "AddToPaymentCards",
+                () => _repository.AddToPaymentCardsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> RemoveFromPaymentCards(MultipleAssociationRequest request, CancellationToken cancellationToken) {
+        try {
+            await _telemetry.Execute(
+                "BankingProduct",
+                "RemoveFromPaymentCards",
+                () => _repository.RemoveFromPaymentCardsAsync(request, cancellationToken));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 

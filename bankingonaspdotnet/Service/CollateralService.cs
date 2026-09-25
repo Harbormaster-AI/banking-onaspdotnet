@@ -1,6 +1,7 @@
 using bankingonaspdotnet.Domain;
 using bankingonaspdotnet.Persistence;
 using bankingonaspdotnet.Contracts;
+using bankingonaspdotnet.Telemetry;
 
 namespace bankingonaspdotnet.Service;
 
@@ -23,23 +24,32 @@ public interface ICollateralService {
 
 public class CollateralService : ICollateralService
 {
+    private readonly ApplicationTelemetry _telemetry;
     private readonly ICollateralRepository _repository;
     private readonly ILogger<CollateralService> _logger;
+    private readonly IServiceResolver _serviceResolver;
+
 
     public CollateralService(
-        ICollateralRepository repository, ILogger<CollateralService> logger )
+        ApplicationTelemetry telemetry,
+        ICollateralRepository repository,
+        ILogger<CollateralService> logger,
+        IServiceResolver serviceResolver)
     {
+        _telemetry = telemetry;
         _repository = repository;
         _logger = logger;
+        _serviceResolver = serviceResolver;
     }
-
 
     public async Task Create(Collateral model, CancellationToken cancellationToken)
     {
-
-         try
+        try
         {
-            await _repository.AddAsync(model, cancellationToken);
+            return await telemetry.Execute(
+                "Collateral",
+                "CreateCollateral",
+                () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -61,7 +71,10 @@ public class CollateralService : ICollateralService
             existing.Location = model.Location;
             existing.CollateralType = model.CollateralType;
 
-            await _repository.UpdateAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "Collateral",
+                "UpdateCollateral",
+                () => _repository.UpdateAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -87,7 +100,10 @@ public class CollateralService : ICollateralService
 
         try
         {
-            await _repository.DeleteAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "Collateral",
+                "UpdateCollateral",
+                () => _repository.DeleteAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -95,13 +111,54 @@ public class CollateralService : ICollateralService
             return false;
         }
         return true;
-
     }
 
     public async Task<bool> AssignLoanAccount(AssociationRequest request, CancellationToken cancellationToken) {
+
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No Collateral found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            var childRequest = new IdentifierRequest
+            {
+                Id = request.ChildId;
+            };
+
+            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken )
+            parent.LoanAccount = child;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> UnassignLoanAccount(AssociationRequest request, CancellationToken cancellationToken) {
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No Collateral found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            parent.LoanAccount = null;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 

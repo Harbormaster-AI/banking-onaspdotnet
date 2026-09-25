@@ -54,4 +54,5 @@ public class FXTradeRepository : IFXTradeRepository
         _db.FXTrades.Remove(fXTrade);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

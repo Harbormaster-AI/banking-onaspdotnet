@@ -44,4 +44,27 @@ public class ThirdPartyProviderRepository : IThirdPartyProviderRepository
         _db.ThirdPartyProviders.Remove(thirdPartyProvider);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task AddToConsentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.Consents
+            .Where(consent => request.ChildIds.Contains(consent.Id))
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    consent => consent.{roleName}_Id,
+                    request.ParentId));
+    }
+
+    public async Task RemoveFromConsentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.Consents
+            .Where(consent =>
+                request.ChildIds.Contains(consent.Id) &&
+                consent.Consents_Id == request.ParentId)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    consent => consent.Consents_Id,
+                    (Guid?)null));
+    }
+
 }

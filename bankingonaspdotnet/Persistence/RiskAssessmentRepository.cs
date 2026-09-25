@@ -44,4 +44,5 @@ public class RiskAssessmentRepository : IRiskAssessmentRepository
         _db.RiskAssessments.Remove(riskAssessment);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

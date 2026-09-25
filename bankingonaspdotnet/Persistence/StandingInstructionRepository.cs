@@ -46,4 +46,5 @@ public class StandingInstructionRepository : IStandingInstructionRepository
         _db.StandingInstructions.Remove(standingInstruction);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

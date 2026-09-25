@@ -44,4 +44,27 @@ public class ExchangeRateRepository : IExchangeRateRepository
         _db.ExchangeRates.Remove(exchangeRate);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task AddToFxTradesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.FxTrades
+            .Where(fXTrade => request.ChildIds.Contains(fXTrade.Id))
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    fXTrade => fXTrade.{roleName}_Id,
+                    request.ParentId));
+    }
+
+    public async Task RemoveFromFxTradesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.FxTrades
+            .Where(fXTrade =>
+                request.ChildIds.Contains(fXTrade.Id) &&
+                fXTrade.FxTrades_Id == request.ParentId)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    fXTrade => fXTrade.FxTrades_Id,
+                    (Guid?)null));
+    }
+
 }

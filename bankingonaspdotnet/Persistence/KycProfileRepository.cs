@@ -44,4 +44,71 @@ public class KycProfileRepository : IKycProfileRepository
         _db.KycProfiles.Remove(kycProfile);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task AddToIdentityDocumentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.IdentityDocuments
+            .Where(identityDocument => request.ChildIds.Contains(identityDocument.Id))
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    identityDocument => identityDocument.{roleName}_Id,
+                    request.ParentId));
+    }
+
+    public async Task RemoveFromIdentityDocumentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.IdentityDocuments
+            .Where(identityDocument =>
+                request.ChildIds.Contains(identityDocument.Id) &&
+                identityDocument.IdentityDocuments_Id == request.ParentId)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    identityDocument => identityDocument.IdentityDocuments_Id,
+                    (Guid?)null));
+    }
+
+    public async Task AddToRiskAssessmentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.RiskAssessments
+            .Where(riskAssessment => request.ChildIds.Contains(riskAssessment.Id))
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    riskAssessment => riskAssessment.{roleName}_Id,
+                    request.ParentId));
+    }
+
+    public async Task RemoveFromRiskAssessmentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.RiskAssessments
+            .Where(riskAssessment =>
+                request.ChildIds.Contains(riskAssessment.Id) &&
+                riskAssessment.RiskAssessments_Id == request.ParentId)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    riskAssessment => riskAssessment.RiskAssessments_Id,
+                    (Guid?)null));
+    }
+
+    public async Task AddToScreeningsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.Screenings
+            .Where(screeningResult => request.ChildIds.Contains(screeningResult.Id))
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    screeningResult => screeningResult.{roleName}_Id,
+                    request.ParentId));
+    }
+
+    public async Task RemoveFromScreeningsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.Screenings
+            .Where(screeningResult =>
+                request.ChildIds.Contains(screeningResult.Id) &&
+                screeningResult.Screenings_Id == request.ParentId)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    screeningResult => screeningResult.Screenings_Id,
+                    (Guid?)null));
+    }
+
 }

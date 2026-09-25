@@ -1,6 +1,7 @@
 using bankingonaspdotnet.Domain;
 using bankingonaspdotnet.Persistence;
 using bankingonaspdotnet.Contracts;
+using bankingonaspdotnet.Telemetry;
 
 namespace bankingonaspdotnet.Service;
 
@@ -23,23 +24,32 @@ public interface IScreeningResultService {
 
 public class ScreeningResultService : IScreeningResultService
 {
+    private readonly ApplicationTelemetry _telemetry;
     private readonly IScreeningResultRepository _repository;
     private readonly ILogger<ScreeningResultService> _logger;
+    private readonly IServiceResolver _serviceResolver;
+
 
     public ScreeningResultService(
-        IScreeningResultRepository repository, ILogger<ScreeningResultService> logger )
+        ApplicationTelemetry telemetry,
+        IScreeningResultRepository repository,
+        ILogger<ScreeningResultService> logger,
+        IServiceResolver serviceResolver)
     {
+        _telemetry = telemetry;
         _repository = repository;
         _logger = logger;
+        _serviceResolver = serviceResolver;
     }
-
 
     public async Task Create(ScreeningResult model, CancellationToken cancellationToken)
     {
-
-         try
+        try
         {
-            await _repository.AddAsync(model, cancellationToken);
+            return await telemetry.Execute(
+                "ScreeningResult",
+                "CreateScreeningResult",
+                () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -59,7 +69,10 @@ public class ScreeningResultService : IScreeningResultService
             existing.Provider = model.Provider;
             existing.Outcome = model.Outcome;
 
-            await _repository.UpdateAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "ScreeningResult",
+                "UpdateScreeningResult",
+                () => _repository.UpdateAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -85,7 +98,10 @@ public class ScreeningResultService : IScreeningResultService
 
         try
         {
-            await _repository.DeleteAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "ScreeningResult",
+                "UpdateScreeningResult",
+                () => _repository.DeleteAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -93,13 +109,54 @@ public class ScreeningResultService : IScreeningResultService
             return false;
         }
         return true;
-
     }
 
     public async Task<bool> AssignKycProfile(AssociationRequest request, CancellationToken cancellationToken) {
+
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No ScreeningResult found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            var childRequest = new IdentifierRequest
+            {
+                Id = request.ChildId;
+            };
+
+            var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken )
+            parent.KycProfile = child;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> UnassignKycProfile(AssociationRequest request, CancellationToken cancellationToken) {
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No ScreeningResult found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            parent.KycProfile = null;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 

@@ -44,4 +44,71 @@ public class BankingProductRepository : IBankingProductRepository
         _db.BankingProducts.Remove(bankingProduct);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task AddToAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.Accounts
+            .Where(account => request.ChildIds.Contains(account.Id))
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    account => account.{roleName}_Id,
+                    request.ParentId));
+    }
+
+    public async Task RemoveFromAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.Accounts
+            .Where(account =>
+                request.ChildIds.Contains(account.Id) &&
+                account.Accounts_Id == request.ParentId)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    account => account.Accounts_Id,
+                    (Guid?)null));
+    }
+
+    public async Task AddToLoanAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.LoanAccounts
+            .Where(loanAccount => request.ChildIds.Contains(loanAccount.Id))
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    loanAccount => loanAccount.{roleName}_Id,
+                    request.ParentId));
+    }
+
+    public async Task RemoveFromLoanAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.LoanAccounts
+            .Where(loanAccount =>
+                request.ChildIds.Contains(loanAccount.Id) &&
+                loanAccount.LoanAccounts_Id == request.ParentId)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    loanAccount => loanAccount.LoanAccounts_Id,
+                    (Guid?)null));
+    }
+
+    public async Task AddToPaymentCardsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.PaymentCards
+            .Where(paymentCard => request.ChildIds.Contains(paymentCard.Id))
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    paymentCard => paymentCard.{roleName}_Id,
+                    request.ParentId));
+    }
+
+    public async Task RemoveFromPaymentCardsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    {
+        await _context.PaymentCards
+            .Where(paymentCard =>
+                request.ChildIds.Contains(paymentCard.Id) &&
+                paymentCard.PaymentCards_Id == request.ParentId)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(
+                    paymentCard => paymentCard.PaymentCards_Id,
+                    (Guid?)null));
+    }
+
 }

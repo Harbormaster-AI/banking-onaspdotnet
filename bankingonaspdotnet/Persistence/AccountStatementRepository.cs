@@ -44,4 +44,5 @@ public class AccountStatementRepository : IAccountStatementRepository
         _db.AccountStatements.Remove(accountStatement);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }

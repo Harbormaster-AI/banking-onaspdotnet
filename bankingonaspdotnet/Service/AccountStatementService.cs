@@ -1,6 +1,7 @@
 using bankingonaspdotnet.Domain;
 using bankingonaspdotnet.Persistence;
 using bankingonaspdotnet.Contracts;
+using bankingonaspdotnet.Telemetry;
 
 namespace bankingonaspdotnet.Service;
 
@@ -23,23 +24,32 @@ public interface IAccountStatementService {
 
 public class AccountStatementService : IAccountStatementService
 {
+    private readonly ApplicationTelemetry _telemetry;
     private readonly IAccountStatementRepository _repository;
     private readonly ILogger<AccountStatementService> _logger;
+    private readonly IServiceResolver _serviceResolver;
+
 
     public AccountStatementService(
-        IAccountStatementRepository repository, ILogger<AccountStatementService> logger )
+        ApplicationTelemetry telemetry,
+        IAccountStatementRepository repository,
+        ILogger<AccountStatementService> logger,
+        IServiceResolver serviceResolver)
     {
+        _telemetry = telemetry;
         _repository = repository;
         _logger = logger;
+        _serviceResolver = serviceResolver;
     }
-
 
     public async Task Create(AccountStatement model, CancellationToken cancellationToken)
     {
-
-         try
+        try
         {
-            await _repository.AddAsync(model, cancellationToken);
+            return await telemetry.Execute(
+                "AccountStatement",
+                "CreateAccountStatement",
+                () => _repository.AddAsync(model, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -62,7 +72,10 @@ public class AccountStatementService : IAccountStatementService
             existing.ClosingBalance = model.ClosingBalance;
             existing.DeliveryMethod = model.DeliveryMethod;
 
-            await _repository.UpdateAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "AccountStatement",
+                "UpdateAccountStatement",
+                () => _repository.UpdateAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -88,7 +101,10 @@ public class AccountStatementService : IAccountStatementService
 
         try
         {
-            await _repository.DeleteAsync(existing, cancellationToken);
+            return await telemetry.Execute(
+                "AccountStatement",
+                "UpdateAccountStatement",
+                () => _repository.DeleteAsync(existing, cancellationToken));
         }
         catch (Exception ex)
         {
@@ -96,13 +112,54 @@ public class AccountStatementService : IAccountStatementService
             return false;
         }
         return true;
-
     }
 
     public async Task<bool> AssignAccount(AssociationRequest request, CancellationToken cancellationToken) {
+
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No AccountStatement found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            var childRequest = new IdentifierRequest
+            {
+                Id = request.ChildId;
+            };
+
+            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
+            parent.Account = child;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
+
     public async Task<bool> UnassignAccount(AssociationRequest request, CancellationToken cancellationToken) {
+        var parent = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+        if (parent is null)
+        {
+            _logger.LogError($"No AccountStatement found using Id {ParentId}", request.ParentId);
+            return false;
+        }
+
+        try
+        {
+            parent.Account = null;
+            Update( parent );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpected Error: {ex.Message}");
+            return false;
+        }
         return true;
     }
 

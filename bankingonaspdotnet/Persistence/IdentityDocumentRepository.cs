@@ -44,4 +44,5 @@ public class IdentityDocumentRepository : IIdentityDocumentRepository
         _db.IdentityDocuments.Remove(identityDocument);
         await _db.SaveChangesAsync(cancellationToken);
     }
+
 }
