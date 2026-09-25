@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +52,7 @@ public class ExchangeRateRepository : IExchangeRateRepository
             .Where(fXTrade => request.ChildIds.Contains(fXTrade.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    fXTrade => fXTrade.{roleName}_Id,
+                    fXTrade => fXTrade.FxTrades_Id,
                     request.ParentId));
     }
 

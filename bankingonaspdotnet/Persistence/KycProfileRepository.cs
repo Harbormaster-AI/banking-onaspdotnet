@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +52,7 @@ public class KycProfileRepository : IKycProfileRepository
             .Where(identityDocument => request.ChildIds.Contains(identityDocument.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    identityDocument => identityDocument.{roleName}_Id,
+                    identityDocument => identityDocument.IdentityDocuments_Id,
                     request.ParentId));
     }
 
@@ -73,7 +74,7 @@ public class KycProfileRepository : IKycProfileRepository
             .Where(riskAssessment => request.ChildIds.Contains(riskAssessment.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    riskAssessment => riskAssessment.{roleName}_Id,
+                    riskAssessment => riskAssessment.RiskAssessments_Id,
                     request.ParentId));
     }
 
@@ -95,7 +96,7 @@ public class KycProfileRepository : IKycProfileRepository
             .Where(screeningResult => request.ChildIds.Contains(screeningResult.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    screeningResult => screeningResult.{roleName}_Id,
+                    screeningResult => screeningResult.Screenings_Id,
                     request.ParentId));
     }
 

@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +52,7 @@ public class CustomerRepository : ICustomerRepository
             .Where(account => request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    account => account.{roleName}_Id,
+                    account => account.Accounts_Id,
                     request.ParentId));
     }
 
@@ -73,7 +74,7 @@ public class CustomerRepository : ICustomerRepository
             .Where(loanAccount => request.ChildIds.Contains(loanAccount.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    loanAccount => loanAccount.{roleName}_Id,
+                    loanAccount => loanAccount.LoanAccounts_Id,
                     request.ParentId));
     }
 
@@ -95,7 +96,7 @@ public class CustomerRepository : ICustomerRepository
             .Where(paymentCard => request.ChildIds.Contains(paymentCard.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    paymentCard => paymentCard.{roleName}_Id,
+                    paymentCard => paymentCard.PaymentCards_Id,
                     request.ParentId));
     }
 
@@ -117,7 +118,7 @@ public class CustomerRepository : ICustomerRepository
             .Where(externalAccount => request.ChildIds.Contains(externalAccount.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    externalAccount => externalAccount.{roleName}_Id,
+                    externalAccount => externalAccount.ExternalAccounts_Id,
                     request.ParentId));
     }
 
@@ -139,7 +140,7 @@ public class CustomerRepository : ICustomerRepository
             .Where(fundsTransfer => request.ChildIds.Contains(fundsTransfer.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    fundsTransfer => fundsTransfer.{roleName}_Id,
+                    fundsTransfer => fundsTransfer.FundsTransfers_Id,
                     request.ParentId));
     }
 
@@ -161,7 +162,7 @@ public class CustomerRepository : ICustomerRepository
             .Where(dispute => request.ChildIds.Contains(dispute.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    dispute => dispute.{roleName}_Id,
+                    dispute => dispute.Disputes_Id,
                     request.ParentId));
     }
 
@@ -183,7 +184,7 @@ public class CustomerRepository : ICustomerRepository
             .Where(kycProfile => request.ChildIds.Contains(kycProfile.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    kycProfile => kycProfile.{roleName}_Id,
+                    kycProfile => kycProfile.KycProfiles_Id,
                     request.ParentId));
     }
 
@@ -205,7 +206,7 @@ public class CustomerRepository : ICustomerRepository
             .Where(consent => request.ChildIds.Contains(consent.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    consent => consent.{roleName}_Id,
+                    consent => consent.Consents_Id,
                     request.ParentId));
     }
 

@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +52,7 @@ public class ThirdPartyProviderRepository : IThirdPartyProviderRepository
             .Where(consent => request.ChildIds.Contains(consent.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    consent => consent.{roleName}_Id,
+                    consent => consent.Consents_Id,
                     request.ParentId));
     }
 

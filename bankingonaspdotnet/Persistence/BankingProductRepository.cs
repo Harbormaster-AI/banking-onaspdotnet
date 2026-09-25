@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +52,7 @@ public class BankingProductRepository : IBankingProductRepository
             .Where(account => request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    account => account.{roleName}_Id,
+                    account => account.Accounts_Id,
                     request.ParentId));
     }
 
@@ -73,7 +74,7 @@ public class BankingProductRepository : IBankingProductRepository
             .Where(loanAccount => request.ChildIds.Contains(loanAccount.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    loanAccount => loanAccount.{roleName}_Id,
+                    loanAccount => loanAccount.LoanAccounts_Id,
                     request.ParentId));
     }
 
@@ -95,7 +96,7 @@ public class BankingProductRepository : IBankingProductRepository
             .Where(paymentCard => request.ChildIds.Contains(paymentCard.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    paymentCard => paymentCard.{roleName}_Id,
+                    paymentCard => paymentCard.PaymentCards_Id,
                     request.ParentId));
     }
 

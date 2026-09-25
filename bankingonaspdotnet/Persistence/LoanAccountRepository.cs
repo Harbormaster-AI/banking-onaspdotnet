@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,7 +56,7 @@ public class LoanAccountRepository : ILoanAccountRepository
             .Where(customer => request.ChildIds.Contains(customer.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    customer => customer.{roleName}_Id,
+                    customer => customer.Borrowers_Id,
                     request.ParentId));
     }
 
@@ -77,7 +78,7 @@ public class LoanAccountRepository : ILoanAccountRepository
             .Where(repaymentSchedule => request.ChildIds.Contains(repaymentSchedule.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    repaymentSchedule => repaymentSchedule.{roleName}_Id,
+                    repaymentSchedule => repaymentSchedule.RepaymentSchedule_Id,
                     request.ParentId));
     }
 
@@ -99,7 +100,7 @@ public class LoanAccountRepository : ILoanAccountRepository
             .Where(loanPayment => request.ChildIds.Contains(loanPayment.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    loanPayment => loanPayment.{roleName}_Id,
+                    loanPayment => loanPayment.Payments_Id,
                     request.ParentId));
     }
 
@@ -121,7 +122,7 @@ public class LoanAccountRepository : ILoanAccountRepository
             .Where(collateral => request.ChildIds.Contains(collateral.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    collateral => collateral.{roleName}_Id,
+                    collateral => collateral.Collateral_Id,
                     request.ParentId));
     }
 
@@ -143,7 +144,7 @@ public class LoanAccountRepository : ILoanAccountRepository
             .Where(feeCharge => request.ChildIds.Contains(feeCharge.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    feeCharge => feeCharge.{roleName}_Id,
+                    feeCharge => feeCharge.FeeCharges_Id,
                     request.ParentId));
     }
 

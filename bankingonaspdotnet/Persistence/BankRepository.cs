@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,7 +50,7 @@ public class BankRepository : IBankRepository
             .Where(branch => request.ChildIds.Contains(branch.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    branch => branch.{roleName}_Id,
+                    branch => branch.Branches_Id,
                     request.ParentId));
     }
 
@@ -71,7 +72,7 @@ public class BankRepository : IBankRepository
             .Where(bankingProduct => request.ChildIds.Contains(bankingProduct.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    bankingProduct => bankingProduct.{roleName}_Id,
+                    bankingProduct => bankingProduct.Products_Id,
                     request.ParentId));
     }
 
@@ -93,7 +94,7 @@ public class BankRepository : IBankRepository
             .Where(customer => request.ChildIds.Contains(customer.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    customer => customer.{roleName}_Id,
+                    customer => customer.Customers_Id,
                     request.ParentId));
     }
 
@@ -115,7 +116,7 @@ public class BankRepository : IBankRepository
             .Where(account => request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    account => account.{roleName}_Id,
+                    account => account.Accounts_Id,
                     request.ParentId));
     }
 
@@ -137,7 +138,7 @@ public class BankRepository : IBankRepository
             .Where(paymentCard => request.ChildIds.Contains(paymentCard.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    paymentCard => paymentCard.{roleName}_Id,
+                    paymentCard => paymentCard.PaymentCards_Id,
                     request.ParentId));
     }
 
@@ -159,7 +160,7 @@ public class BankRepository : IBankRepository
             .Where(loanAccount => request.ChildIds.Contains(loanAccount.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    loanAccount => loanAccount.{roleName}_Id,
+                    loanAccount => loanAccount.LoanAccounts_Id,
                     request.ParentId));
     }
 
@@ -181,7 +182,7 @@ public class BankRepository : IBankRepository
             .Where(exchangeRate => request.ChildIds.Contains(exchangeRate.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    exchangeRate => exchangeRate.{roleName}_Id,
+                    exchangeRate => exchangeRate.ExchangeRates_Id,
                     request.ParentId));
     }
 
@@ -203,7 +204,7 @@ public class BankRepository : IBankRepository
             .Where(consent => request.ChildIds.Contains(consent.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    consent => consent.{roleName}_Id,
+                    consent => consent.Consents_Id,
                     request.ParentId));
     }
 
@@ -225,7 +226,7 @@ public class BankRepository : IBankRepository
             .Where(thirdPartyProvider => request.ChildIds.Contains(thirdPartyProvider.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    thirdPartyProvider => thirdPartyProvider.{roleName}_Id,
+                    thirdPartyProvider => thirdPartyProvider.ThirdPartyProviders_Id,
                     request.ParentId));
     }
 

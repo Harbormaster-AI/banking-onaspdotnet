@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +52,7 @@ public class ExternalAccountRepository : IExternalAccountRepository
             .Where(transaction => request.ChildIds.Contains(transaction.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    transaction => transaction.{roleName}_Id,
+                    transaction => transaction.Transactions_Id,
                     request.ParentId));
     }
 

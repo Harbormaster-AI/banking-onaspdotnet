@@ -1,3 +1,4 @@
+
 using bankingonaspdotnet.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,7 +56,7 @@ public class ConsentRepository : IConsentRepository
             .Where(account => request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    account => account.{roleName}_Id,
+                    account => account.AuthorizedAccounts_Id,
                     request.ParentId));
     }
 
