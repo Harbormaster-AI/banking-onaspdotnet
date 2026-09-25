@@ -125,7 +125,7 @@ public class KycProfileRepository : IKycProfileRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Screenings
+        await _db.ScreeningResults
             .Where(screeningResult =>
                 request.ChildIds.Contains(screeningResult.Id))
             .ExecuteUpdateAsync(setters =>
@@ -141,7 +141,7 @@ public class KycProfileRepository : IKycProfileRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Screenings
+        await _db.ScreeningResults
             .Where(screeningResult =>
                 request.ChildIds.Contains(screeningResult.Id) &&
                 EF.Property<Guid?>(

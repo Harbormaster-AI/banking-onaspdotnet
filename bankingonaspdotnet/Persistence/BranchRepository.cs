@@ -125,7 +125,7 @@ public class BranchRepository : IBranchRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Atms
+        await _db.ATMs
             .Where(aTM =>
                 request.ChildIds.Contains(aTM.Id))
             .ExecuteUpdateAsync(setters =>
@@ -141,7 +141,7 @@ public class BranchRepository : IBranchRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Atms
+        await _db.ATMs
             .Where(aTM =>
                 request.ChildIds.Contains(aTM.Id) &&
                 EF.Property<Guid?>(

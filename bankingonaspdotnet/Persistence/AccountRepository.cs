@@ -57,7 +57,7 @@ public class AccountRepository : IAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Owners
+        await _db.Customers
             .Where(customer =>
                 request.ChildIds.Contains(customer.Id))
             .ExecuteUpdateAsync(setters =>
@@ -73,7 +73,7 @@ public class AccountRepository : IAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Owners
+        await _db.Customers
             .Where(customer =>
                 request.ChildIds.Contains(customer.Id) &&
                 EF.Property<Guid?>(
@@ -129,7 +129,7 @@ public class AccountRepository : IAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Statements
+        await _db.AccountStatements
             .Where(accountStatement =>
                 request.ChildIds.Contains(accountStatement.Id))
             .ExecuteUpdateAsync(setters =>
@@ -145,7 +145,7 @@ public class AccountRepository : IAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Statements
+        await _db.AccountStatements
             .Where(accountStatement =>
                 request.ChildIds.Contains(accountStatement.Id) &&
                 EF.Property<Guid?>(

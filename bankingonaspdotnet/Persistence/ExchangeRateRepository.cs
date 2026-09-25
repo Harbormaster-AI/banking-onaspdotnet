@@ -53,7 +53,7 @@ public class ExchangeRateRepository : IExchangeRateRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.FxTrades
+        await _db.FXTrades
             .Where(fXTrade =>
                 request.ChildIds.Contains(fXTrade.Id))
             .ExecuteUpdateAsync(setters =>
@@ -69,7 +69,7 @@ public class ExchangeRateRepository : IExchangeRateRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.FxTrades
+        await _db.FXTrades
             .Where(fXTrade =>
                 request.ChildIds.Contains(fXTrade.Id) &&
                 EF.Property<Guid?>(

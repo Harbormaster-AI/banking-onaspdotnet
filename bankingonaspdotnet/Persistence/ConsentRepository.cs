@@ -57,7 +57,7 @@ public class ConsentRepository : IConsentRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.AuthorizedAccounts
+        await _db.Accounts
             .Where(account =>
                 request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
@@ -73,7 +73,7 @@ public class ConsentRepository : IConsentRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.AuthorizedAccounts
+        await _db.Accounts
             .Where(account =>
                 request.ChildIds.Contains(account.Id) &&
                 EF.Property<Guid?>(

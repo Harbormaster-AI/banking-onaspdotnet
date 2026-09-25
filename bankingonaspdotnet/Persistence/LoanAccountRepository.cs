@@ -57,7 +57,7 @@ public class LoanAccountRepository : ILoanAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Borrowers
+        await _db.Customers
             .Where(customer =>
                 request.ChildIds.Contains(customer.Id))
             .ExecuteUpdateAsync(setters =>
@@ -73,7 +73,7 @@ public class LoanAccountRepository : ILoanAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Borrowers
+        await _db.Customers
             .Where(customer =>
                 request.ChildIds.Contains(customer.Id) &&
                 EF.Property<Guid?>(
@@ -93,7 +93,7 @@ public class LoanAccountRepository : ILoanAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.RepaymentSchedule
+        await _db.RepaymentSchedules
             .Where(repaymentSchedule =>
                 request.ChildIds.Contains(repaymentSchedule.Id))
             .ExecuteUpdateAsync(setters =>
@@ -109,7 +109,7 @@ public class LoanAccountRepository : ILoanAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.RepaymentSchedule
+        await _db.RepaymentSchedules
             .Where(repaymentSchedule =>
                 request.ChildIds.Contains(repaymentSchedule.Id) &&
                 EF.Property<Guid?>(
@@ -129,7 +129,7 @@ public class LoanAccountRepository : ILoanAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Payments
+        await _db.LoanPayments
             .Where(loanPayment =>
                 request.ChildIds.Contains(loanPayment.Id))
             .ExecuteUpdateAsync(setters =>
@@ -145,7 +145,7 @@ public class LoanAccountRepository : ILoanAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Payments
+        await _db.LoanPayments
             .Where(loanPayment =>
                 request.ChildIds.Contains(loanPayment.Id) &&
                 EF.Property<Guid?>(
@@ -165,7 +165,7 @@ public class LoanAccountRepository : ILoanAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Collateral
+        await _db.Collaterals
             .Where(collateral =>
                 request.ChildIds.Contains(collateral.Id))
             .ExecuteUpdateAsync(setters =>
@@ -181,7 +181,7 @@ public class LoanAccountRepository : ILoanAccountRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Collateral
+        await _db.Collaterals
             .Where(collateral =>
                 request.ChildIds.Contains(collateral.Id) &&
                 EF.Property<Guid?>(

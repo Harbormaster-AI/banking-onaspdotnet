@@ -51,7 +51,7 @@ public class BankRepository : IBankRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Branches
+        await _db.Branchs
             .Where(branch =>
                 request.ChildIds.Contains(branch.Id))
             .ExecuteUpdateAsync(setters =>
@@ -67,7 +67,7 @@ public class BankRepository : IBankRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Branches
+        await _db.Branchs
             .Where(branch =>
                 request.ChildIds.Contains(branch.Id) &&
                 EF.Property<Guid?>(
@@ -87,7 +87,7 @@ public class BankRepository : IBankRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Products
+        await _db.BankingProducts
             .Where(bankingProduct =>
                 request.ChildIds.Contains(bankingProduct.Id))
             .ExecuteUpdateAsync(setters =>
@@ -103,7 +103,7 @@ public class BankRepository : IBankRepository
         MultipleAssociationRequest request,
         CancellationToken cancellationToken)
     {
-        await _db.Products
+        await _db.BankingProducts
             .Where(bankingProduct =>
                 request.ChildIds.Contains(bankingProduct.Id) &&
                 EF.Property<Guid?>(
