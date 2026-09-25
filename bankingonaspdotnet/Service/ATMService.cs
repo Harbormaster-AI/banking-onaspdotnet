@@ -135,7 +135,7 @@ public class ATMService : IATMService
 
             var child = await _serviceResolver.Get<BranchService>().Get(childRequest, cancellationToken);
             parent.Branch = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -158,7 +158,7 @@ public class ATMService : IATMService
         try
         {
             parent.Branch = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

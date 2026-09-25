@@ -137,7 +137,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
 
             var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -160,7 +160,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
         try
         {
             parent.Bank = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

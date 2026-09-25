@@ -140,7 +140,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
 
             var child = await _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -163,7 +163,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         try
         {
             parent.LoanAccount = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -193,7 +193,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
 
             var child = await _serviceResolver.Get<LoanPaymentService>().Get(childRequest, cancellationToken);
             parent.Payment = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -216,7 +216,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         try
         {
             parent.Payment = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

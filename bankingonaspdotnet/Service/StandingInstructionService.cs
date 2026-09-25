@@ -139,7 +139,7 @@ public class StandingInstructionService : IStandingInstructionService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -162,7 +162,7 @@ public class StandingInstructionService : IStandingInstructionService
         try
         {
             parent.Account = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -192,7 +192,7 @@ public class StandingInstructionService : IStandingInstructionService
 
             var child = await _serviceResolver.Get<ExternalAccountService>().Get(childRequest, cancellationToken);
             parent.Beneficiary = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -215,7 +215,7 @@ public class StandingInstructionService : IStandingInstructionService
         try
         {
             parent.Beneficiary = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

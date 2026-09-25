@@ -137,7 +137,7 @@ public class CollateralService : ICollateralService
 
             var child = await _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -160,7 +160,7 @@ public class CollateralService : ICollateralService
         try
         {
             parent.LoanAccount = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

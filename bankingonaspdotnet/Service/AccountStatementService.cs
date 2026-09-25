@@ -138,7 +138,7 @@ public class AccountStatementService : IAccountStatementService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -161,7 +161,7 @@ public class AccountStatementService : IAccountStatementService
         try
         {
             parent.Account = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

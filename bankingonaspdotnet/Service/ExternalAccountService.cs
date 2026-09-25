@@ -140,7 +140,7 @@ public class ExternalAccountService : IExternalAccountService
 
             var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -163,7 +163,7 @@ public class ExternalAccountService : IExternalAccountService
         try
         {
             parent.Customer = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

@@ -139,7 +139,7 @@ public class LoanPaymentService : ILoanPaymentService
 
             var child = await _serviceResolver.Get<LoanAccountService>().Get(childRequest, cancellationToken);
             parent.LoanAccount = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -162,7 +162,7 @@ public class LoanPaymentService : ILoanPaymentService
         try
         {
             parent.LoanAccount = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -192,7 +192,7 @@ public class LoanPaymentService : ILoanPaymentService
 
             var child = await _serviceResolver.Get<TransactionService>().Get(childRequest, cancellationToken);
             parent.Transaction = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -215,7 +215,7 @@ public class LoanPaymentService : ILoanPaymentService
         try
         {
             parent.Transaction = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

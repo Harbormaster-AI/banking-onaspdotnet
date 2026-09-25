@@ -142,7 +142,7 @@ public class DisputeService : IDisputeService
 
             var child = await _serviceResolver.Get<TransactionService>().Get(childRequest, cancellationToken);
             parent.Transaction = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -165,7 +165,7 @@ public class DisputeService : IDisputeService
         try
         {
             parent.Transaction = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -195,7 +195,7 @@ public class DisputeService : IDisputeService
 
             var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -218,7 +218,7 @@ public class DisputeService : IDisputeService
         try
         {
             parent.Customer = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -248,7 +248,7 @@ public class DisputeService : IDisputeService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -271,7 +271,7 @@ public class DisputeService : IDisputeService
         try
         {
             parent.Account = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -301,7 +301,7 @@ public class DisputeService : IDisputeService
 
             var child = await _serviceResolver.Get<PaymentCardService>().Get(childRequest, cancellationToken);
             parent.PaymentCard = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -324,7 +324,7 @@ public class DisputeService : IDisputeService
         try
         {
             parent.PaymentCard = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

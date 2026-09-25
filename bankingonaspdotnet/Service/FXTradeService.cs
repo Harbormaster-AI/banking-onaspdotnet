@@ -149,7 +149,7 @@ public class FXTradeService : IFXTradeService
 
             var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -172,7 +172,7 @@ public class FXTradeService : IFXTradeService
         try
         {
             parent.Customer = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -202,7 +202,7 @@ public class FXTradeService : IFXTradeService
 
             var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -225,7 +225,7 @@ public class FXTradeService : IFXTradeService
         try
         {
             parent.Bank = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -255,7 +255,7 @@ public class FXTradeService : IFXTradeService
 
             var child = await _serviceResolver.Get<ExchangeRateService>().Get(childRequest, cancellationToken);
             parent.ExchangeRate = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -278,7 +278,7 @@ public class FXTradeService : IFXTradeService
         try
         {
             parent.ExchangeRate = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -308,7 +308,7 @@ public class FXTradeService : IFXTradeService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.SourceAccount = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -331,7 +331,7 @@ public class FXTradeService : IFXTradeService
         try
         {
             parent.SourceAccount = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -361,7 +361,7 @@ public class FXTradeService : IFXTradeService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.DestinationAccount = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -384,7 +384,7 @@ public class FXTradeService : IFXTradeService
         try
         {
             parent.DestinationAccount = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -414,7 +414,7 @@ public class FXTradeService : IFXTradeService
 
             var child = await _serviceResolver.Get<TransactionService>().Get(childRequest, cancellationToken);
             parent.Transaction = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -437,7 +437,7 @@ public class FXTradeService : IFXTradeService
         try
         {
             parent.Transaction = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

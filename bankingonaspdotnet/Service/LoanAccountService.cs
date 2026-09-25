@@ -158,7 +158,7 @@ public class LoanAccountService : ILoanAccountService
 
             var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -181,7 +181,7 @@ public class LoanAccountService : ILoanAccountService
         try
         {
             parent.Bank = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -211,7 +211,7 @@ public class LoanAccountService : ILoanAccountService
 
             var child = await _serviceResolver.Get<BranchService>().Get(childRequest, cancellationToken);
             parent.Branch = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -234,7 +234,7 @@ public class LoanAccountService : ILoanAccountService
         try
         {
             parent.Branch = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -264,7 +264,7 @@ public class LoanAccountService : ILoanAccountService
 
             var child = await _serviceResolver.Get<BankingProductService>().Get(childRequest, cancellationToken);
             parent.Product = child;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -287,7 +287,7 @@ public class LoanAccountService : ILoanAccountService
         try
         {
             parent.Product = null;
-            Update( parent, cancellationToken );
+            await Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
