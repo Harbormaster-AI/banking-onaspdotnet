@@ -48,7 +48,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ThirdPartyProvider",
                 "CreateThirdPartyProvider",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -71,7 +71,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
             existing.RegistrationId = model.RegistrationId;
             existing.Website = model.Website;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ThirdPartyProvider",
                 "UpdateThirdPartyProvider",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -100,7 +100,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ThirdPartyProvider",
                 "UpdateThirdPartyProvider",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -129,7 +129,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }

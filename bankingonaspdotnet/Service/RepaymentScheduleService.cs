@@ -48,7 +48,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "RepaymentSchedule",
                 "CreateRepaymentSchedule",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -74,7 +74,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
             existing.TotalDue = model.TotalDue;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "RepaymentSchedule",
                 "UpdateRepaymentSchedule",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -103,7 +103,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "RepaymentSchedule",
                 "UpdateRepaymentSchedule",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -132,7 +132,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }
@@ -181,7 +181,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(LoanPaymentService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(LoanPaymentService).get( childRequest , cancellationToken );
             parent.Payment = child;
             Update( parent );
         }

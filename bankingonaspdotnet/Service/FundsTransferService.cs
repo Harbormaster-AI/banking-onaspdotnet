@@ -54,7 +54,7 @@ public class FundsTransferService : IFundsTransferService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FundsTransfer",
                 "CreateFundsTransfer",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -82,7 +82,7 @@ public class FundsTransferService : IFundsTransferService
             existing.Method = model.Method;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FundsTransfer",
                 "UpdateFundsTransfer",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -111,7 +111,7 @@ public class FundsTransferService : IFundsTransferService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FundsTransfer",
                 "UpdateFundsTransfer",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -140,7 +140,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.SourceAccount = child;
             Update( parent );
         }
@@ -189,7 +189,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.DestinationAccount = child;
             Update( parent );
         }
@@ -238,7 +238,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
             parent.ExternalBeneficiary = child;
             Update( parent );
         }
@@ -287,7 +287,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.InitiatedBy = child;
             Update( parent );
         }

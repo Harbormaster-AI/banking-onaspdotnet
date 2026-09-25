@@ -46,7 +46,7 @@ public class CollateralService : ICollateralService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Collateral",
                 "CreateCollateral",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -71,7 +71,7 @@ public class CollateralService : ICollateralService
             existing.Location = model.Location;
             existing.CollateralType = model.CollateralType;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Collateral",
                 "UpdateCollateral",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -100,7 +100,7 @@ public class CollateralService : ICollateralService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Collateral",
                 "UpdateCollateral",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -129,7 +129,7 @@ public class CollateralService : ICollateralService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }

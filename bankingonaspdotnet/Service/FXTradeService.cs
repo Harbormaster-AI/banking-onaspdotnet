@@ -56,7 +56,7 @@ public class FXTradeService : IFXTradeService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FXTrade",
                 "CreateFXTrade",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -83,7 +83,7 @@ public class FXTradeService : IFXTradeService
             existing.Rate = model.Rate;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FXTrade",
                 "UpdateFXTrade",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -112,7 +112,7 @@ public class FXTradeService : IFXTradeService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FXTrade",
                 "UpdateFXTrade",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -141,7 +141,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
@@ -190,7 +190,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
@@ -239,7 +239,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(ExchangeRateService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(ExchangeRateService).get( childRequest , cancellationToken );
             parent.ExchangeRate = child;
             Update( parent );
         }
@@ -288,7 +288,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.SourceAccount = child;
             Update( parent );
         }
@@ -337,7 +337,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.DestinationAccount = child;
             Update( parent );
         }
@@ -386,7 +386,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(TransactionService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(TransactionService).get( childRequest , cancellationToken );
             parent.Transaction = child;
             Update( parent );
         }

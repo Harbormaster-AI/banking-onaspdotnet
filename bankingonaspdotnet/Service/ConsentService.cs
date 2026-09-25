@@ -52,7 +52,7 @@ public class ConsentService : IConsentService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Consent",
                 "CreateConsent",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -76,7 +76,7 @@ public class ConsentService : IConsentService
             existing.ConsentType = model.ConsentType;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Consent",
                 "UpdateConsent",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -105,7 +105,7 @@ public class ConsentService : IConsentService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Consent",
                 "UpdateConsent",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -134,7 +134,7 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
@@ -183,7 +183,7 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
@@ -232,7 +232,7 @@ public class ConsentService : IConsentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(ThirdPartyProviderService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(ThirdPartyProviderService).get( childRequest , cancellationToken );
             parent.ThirdPartyProvider = child;
             Update( parent );
         }

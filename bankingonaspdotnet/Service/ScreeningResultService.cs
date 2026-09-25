@@ -46,7 +46,7 @@ public class ScreeningResultService : IScreeningResultService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ScreeningResult",
                 "CreateScreeningResult",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -69,7 +69,7 @@ public class ScreeningResultService : IScreeningResultService
             existing.Provider = model.Provider;
             existing.Outcome = model.Outcome;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ScreeningResult",
                 "UpdateScreeningResult",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -98,7 +98,7 @@ public class ScreeningResultService : IScreeningResultService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ScreeningResult",
                 "UpdateScreeningResult",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -127,7 +127,7 @@ public class ScreeningResultService : IScreeningResultService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(KycProfileService).get( childRequest , cancellationToken );
             parent.KycProfile = child;
             Update( parent );
         }

@@ -48,7 +48,7 @@ public class ExternalAccountService : IExternalAccountService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ExternalAccount",
                 "CreateExternalAccount",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -74,7 +74,7 @@ public class ExternalAccountService : IExternalAccountService
             existing.BankName = model.BankName;
             existing.Country = model.Country;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ExternalAccount",
                 "UpdateExternalAccount",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -103,7 +103,7 @@ public class ExternalAccountService : IExternalAccountService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ExternalAccount",
                 "UpdateExternalAccount",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -132,7 +132,7 @@ public class ExternalAccountService : IExternalAccountService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }

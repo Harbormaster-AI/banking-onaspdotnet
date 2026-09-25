@@ -46,7 +46,7 @@ public class IdentityDocumentService : IIdentityDocumentService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "IdentityDocument",
                 "CreateIdentityDocument",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -70,7 +70,7 @@ public class IdentityDocumentService : IIdentityDocumentService
             existing.ExpirationDate = model.ExpirationDate;
             existing.DocumentType = model.DocumentType;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "IdentityDocument",
                 "UpdateIdentityDocument",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -99,7 +99,7 @@ public class IdentityDocumentService : IIdentityDocumentService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "IdentityDocument",
                 "UpdateIdentityDocument",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -128,7 +128,7 @@ public class IdentityDocumentService : IIdentityDocumentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(KycProfileService).get( childRequest , cancellationToken );
             parent.KycProfile = child;
             Update( parent );
         }

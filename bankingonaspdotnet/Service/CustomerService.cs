@@ -62,7 +62,7 @@ public class CustomerService : ICustomerService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Customer",
                 "CreateCustomer",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -93,7 +93,7 @@ public class CustomerService : ICustomerService
             existing.RiskRating = model.RiskRating;
             existing.KycStatus = model.KycStatus;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Customer",
                 "UpdateCustomer",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -122,7 +122,7 @@ public class CustomerService : ICustomerService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Customer",
                 "UpdateCustomer",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -151,7 +151,7 @@ public class CustomerService : ICustomerService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }

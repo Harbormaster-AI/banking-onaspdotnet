@@ -48,7 +48,7 @@ public class StandingInstructionService : IStandingInstructionService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "StandingInstruction",
                 "CreateStandingInstruction",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -73,7 +73,7 @@ public class StandingInstructionService : IStandingInstructionService
             existing.Frequency = model.Frequency;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "StandingInstruction",
                 "UpdateStandingInstruction",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -102,7 +102,7 @@ public class StandingInstructionService : IStandingInstructionService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "StandingInstruction",
                 "UpdateStandingInstruction",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -131,7 +131,7 @@ public class StandingInstructionService : IStandingInstructionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -180,7 +180,7 @@ public class StandingInstructionService : IStandingInstructionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
             parent.Beneficiary = child;
             Update( parent );
         }

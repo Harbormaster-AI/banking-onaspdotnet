@@ -48,7 +48,7 @@ public class FeeChargeService : IFeeChargeService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FeeCharge",
                 "CreateFeeCharge",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -72,7 +72,7 @@ public class FeeChargeService : IFeeChargeService
             existing.AppliedOn = model.AppliedOn;
             existing.FeeType = model.FeeType;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FeeCharge",
                 "UpdateFeeCharge",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -101,7 +101,7 @@ public class FeeChargeService : IFeeChargeService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "FeeCharge",
                 "UpdateFeeCharge",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -130,7 +130,7 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -179,7 +179,7 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }

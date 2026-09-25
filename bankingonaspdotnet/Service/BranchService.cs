@@ -52,7 +52,7 @@ public class BranchService : IBranchService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Branch",
                 "CreateBranch",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -77,7 +77,7 @@ public class BranchService : IBranchService
             existing.Phone = model.Phone;
             existing.OpeningHours = model.OpeningHours;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Branch",
                 "UpdateBranch",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -106,7 +106,7 @@ public class BranchService : IBranchService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Branch",
                 "UpdateBranch",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -135,7 +135,7 @@ public class BranchService : IBranchService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }

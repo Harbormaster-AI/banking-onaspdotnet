@@ -52,7 +52,7 @@ public class BankingProductService : IBankingProductService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "BankingProduct",
                 "CreateBankingProduct",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -76,7 +76,7 @@ public class BankingProductService : IBankingProductService
             existing.Description = model.Description;
             existing.ProductCategory = model.ProductCategory;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "BankingProduct",
                 "UpdateBankingProduct",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -105,7 +105,7 @@ public class BankingProductService : IBankingProductService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "BankingProduct",
                 "UpdateBankingProduct",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -134,7 +134,7 @@ public class BankingProductService : IBankingProductService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }

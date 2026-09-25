@@ -56,7 +56,7 @@ public class TransactionService : ITransactionService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Transaction",
                 "CreateTransaction",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -84,7 +84,7 @@ public class TransactionService : ITransactionService
             existing.Status = model.Status;
             existing.Channel = model.Channel;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Transaction",
                 "UpdateTransaction",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -113,7 +113,7 @@ public class TransactionService : ITransactionService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Transaction",
                 "UpdateTransaction",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -142,7 +142,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -191,7 +191,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
             parent.ExternalCounterparty = child;
             Update( parent );
         }
@@ -240,7 +240,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(PaymentCardService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(PaymentCardService).get( childRequest , cancellationToken );
             parent.PaymentCard = child;
             Update( parent );
         }
@@ -289,7 +289,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(FundsTransferService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(FundsTransferService).get( childRequest , cancellationToken );
             parent.FundsTransfer = child;
             Update( parent );
         }
@@ -338,7 +338,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(FXTradeService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(FXTradeService).get( childRequest , cancellationToken );
             parent.FxTrade = child;
             Update( parent );
         }
@@ -387,7 +387,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(DisputeService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(DisputeService).get( childRequest , cancellationToken );
             parent.Dispute = child;
             Update( parent );
         }

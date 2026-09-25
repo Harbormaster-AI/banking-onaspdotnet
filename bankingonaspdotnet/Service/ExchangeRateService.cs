@@ -48,7 +48,7 @@ public class ExchangeRateService : IExchangeRateService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ExchangeRate",
                 "CreateExchangeRate",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -73,7 +73,7 @@ public class ExchangeRateService : IExchangeRateService
             existing.AsOf = model.AsOf;
             existing.Source = model.Source;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ExchangeRate",
                 "UpdateExchangeRate",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -102,7 +102,7 @@ public class ExchangeRateService : IExchangeRateService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ExchangeRate",
                 "UpdateExchangeRate",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -131,7 +131,7 @@ public class ExchangeRateService : IExchangeRateService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }

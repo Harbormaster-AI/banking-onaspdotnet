@@ -46,7 +46,7 @@ public class ATMService : IATMService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ATM",
                 "CreateATM",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -69,7 +69,7 @@ public class ATMService : IATMService
             existing.Location = model.Location;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ATM",
                 "UpdateATM",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -98,7 +98,7 @@ public class ATMService : IATMService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "ATM",
                 "UpdateATM",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -127,7 +127,7 @@ public class ATMService : IATMService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BranchService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BranchService).get( childRequest , cancellationToken );
             parent.Branch = child;
             Update( parent );
         }

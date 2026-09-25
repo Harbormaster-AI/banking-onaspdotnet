@@ -48,7 +48,7 @@ public class LoanPaymentService : ILoanPaymentService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "LoanPayment",
                 "CreateLoanPayment",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -73,7 +73,7 @@ public class LoanPaymentService : ILoanPaymentService
             existing.Method = model.Method;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "LoanPayment",
                 "UpdateLoanPayment",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -102,7 +102,7 @@ public class LoanPaymentService : ILoanPaymentService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "LoanPayment",
                 "UpdateLoanPayment",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -131,7 +131,7 @@ public class LoanPaymentService : ILoanPaymentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }
@@ -180,7 +180,7 @@ public class LoanPaymentService : ILoanPaymentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(TransactionService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(TransactionService).get( childRequest , cancellationToken );
             parent.Transaction = child;
             Update( parent );
         }

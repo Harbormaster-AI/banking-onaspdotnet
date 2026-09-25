@@ -62,7 +62,7 @@ public class BankService : IBankService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Bank",
                 "CreateBank",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -87,7 +87,7 @@ public class BankService : IBankService
             existing.HeadquartersCountry = model.HeadquartersCountry;
             existing.Website = model.Website;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Bank",
                 "UpdateBank",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -116,7 +116,7 @@ public class BankService : IBankService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Bank",
                 "UpdateBank",
                 () => _repository.DeleteAsync(existing, cancellationToken));

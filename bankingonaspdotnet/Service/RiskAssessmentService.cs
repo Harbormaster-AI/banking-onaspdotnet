@@ -46,7 +46,7 @@ public class RiskAssessmentService : IRiskAssessmentService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "RiskAssessment",
                 "CreateRiskAssessment",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -69,7 +69,7 @@ public class RiskAssessmentService : IRiskAssessmentService
             existing.AssessedOn = model.AssessedOn;
             existing.Rating = model.Rating;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "RiskAssessment",
                 "UpdateRiskAssessment",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -98,7 +98,7 @@ public class RiskAssessmentService : IRiskAssessmentService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "RiskAssessment",
                 "UpdateRiskAssessment",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -127,7 +127,7 @@ public class RiskAssessmentService : IRiskAssessmentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(KycProfileService).get( childRequest , cancellationToken );
             parent.KycProfile = child;
             Update( parent );
         }

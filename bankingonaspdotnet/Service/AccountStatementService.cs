@@ -46,7 +46,7 @@ public class AccountStatementService : IAccountStatementService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "AccountStatement",
                 "CreateAccountStatement",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -72,7 +72,7 @@ public class AccountStatementService : IAccountStatementService
             existing.ClosingBalance = model.ClosingBalance;
             existing.DeliveryMethod = model.DeliveryMethod;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "AccountStatement",
                 "UpdateAccountStatement",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -101,7 +101,7 @@ public class AccountStatementService : IAccountStatementService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "AccountStatement",
                 "UpdateAccountStatement",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -130,7 +130,7 @@ public class AccountStatementService : IAccountStatementService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }

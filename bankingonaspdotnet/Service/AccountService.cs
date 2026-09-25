@@ -60,7 +60,7 @@ public class AccountService : IAccountService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Account",
                 "CreateAccount",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -89,7 +89,7 @@ public class AccountService : IAccountService
             existing.OwnershipType = model.OwnershipType;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Account",
                 "UpdateAccount",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -118,7 +118,7 @@ public class AccountService : IAccountService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "Account",
                 "UpdateAccount",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -147,7 +147,7 @@ public class AccountService : IAccountService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
@@ -196,7 +196,7 @@ public class AccountService : IAccountService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BranchService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BranchService).get( childRequest , cancellationToken );
             parent.Branch = child;
             Update( parent );
         }
@@ -245,7 +245,7 @@ public class AccountService : IAccountService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankingProductService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankingProductService).get( childRequest , cancellationToken );
             parent.Product = child;
             Update( parent );
         }

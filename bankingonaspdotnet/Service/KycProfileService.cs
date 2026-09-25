@@ -52,7 +52,7 @@ public class KycProfileService : IKycProfileService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "KycProfile",
                 "CreateKycProfile",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -75,7 +75,7 @@ public class KycProfileService : IKycProfileService
             existing.LastReviewedOn = model.LastReviewedOn;
             existing.Status = model.Status;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "KycProfile",
                 "UpdateKycProfile",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -104,7 +104,7 @@ public class KycProfileService : IKycProfileService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "KycProfile",
                 "UpdateKycProfile",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -133,7 +133,7 @@ public class KycProfileService : IKycProfileService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }

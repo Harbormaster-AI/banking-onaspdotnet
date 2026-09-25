@@ -52,7 +52,7 @@ public class PaymentCardService : IPaymentCardService
     {
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "PaymentCard",
                 "CreatePaymentCard",
                 () => _repository.AddAsync(model, cancellationToken));
@@ -79,7 +79,7 @@ public class PaymentCardService : IPaymentCardService
             existing.CardStatus = model.CardStatus;
             existing.Network = model.Network;
 
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "PaymentCard",
                 "UpdatePaymentCard",
                 () => _repository.UpdateAsync(existing, cancellationToken));
@@ -108,7 +108,7 @@ public class PaymentCardService : IPaymentCardService
 
         try
         {
-            return await telemetry.Execute(
+            return await _telemetry.Execute(
                 "PaymentCard",
                 "UpdatePaymentCard",
                 () => _repository.DeleteAsync(existing, cancellationToken));
@@ -137,7 +137,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
@@ -186,7 +186,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -235,7 +235,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
