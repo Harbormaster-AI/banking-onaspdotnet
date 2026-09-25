@@ -1,4 +1,5 @@
 using bankingonaspdotnet.Domain;
+using bankingonaspdotnet.Contracts;
 
 namespace bankingonaspdotnet.Persistence;
 
