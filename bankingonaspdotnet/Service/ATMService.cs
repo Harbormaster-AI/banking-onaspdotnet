@@ -69,7 +69,7 @@ public class ATMService : IATMService
             existing.Location = model.Location;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ATM",
                 "UpdateATM",
                 () => _repository.UpdateAsync(existing, cancellationToken));

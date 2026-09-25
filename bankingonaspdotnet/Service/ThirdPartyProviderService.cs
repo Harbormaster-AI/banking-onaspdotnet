@@ -71,7 +71,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
             existing.RegistrationId = model.RegistrationId;
             existing.Website = model.Website;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ThirdPartyProvider",
                 "UpdateThirdPartyProvider",
                 () => _repository.UpdateAsync(existing, cancellationToken));

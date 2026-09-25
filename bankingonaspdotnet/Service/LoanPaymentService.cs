@@ -73,7 +73,7 @@ public class LoanPaymentService : ILoanPaymentService
             existing.Method = model.Method;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "LoanPayment",
                 "UpdateLoanPayment",
                 () => _repository.UpdateAsync(existing, cancellationToken));

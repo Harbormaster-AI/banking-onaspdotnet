@@ -73,7 +73,7 @@ public class StandingInstructionService : IStandingInstructionService
             existing.Frequency = model.Frequency;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "StandingInstruction",
                 "UpdateStandingInstruction",
                 () => _repository.UpdateAsync(existing, cancellationToken));

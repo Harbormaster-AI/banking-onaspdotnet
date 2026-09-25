@@ -69,7 +69,7 @@ public class RiskAssessmentService : IRiskAssessmentService
             existing.AssessedOn = model.AssessedOn;
             existing.Rating = model.Rating;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "RiskAssessment",
                 "UpdateRiskAssessment",
                 () => _repository.UpdateAsync(existing, cancellationToken));

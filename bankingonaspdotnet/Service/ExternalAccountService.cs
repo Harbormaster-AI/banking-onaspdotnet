@@ -74,7 +74,7 @@ public class ExternalAccountService : IExternalAccountService
             existing.BankName = model.BankName;
             existing.Country = model.Country;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ExternalAccount",
                 "UpdateExternalAccount",
                 () => _repository.UpdateAsync(existing, cancellationToken));

@@ -77,7 +77,7 @@ public class BranchService : IBranchService
             existing.Phone = model.Phone;
             existing.OpeningHours = model.OpeningHours;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Branch",
                 "UpdateBranch",
                 () => _repository.UpdateAsync(existing, cancellationToken));

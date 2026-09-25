@@ -70,7 +70,7 @@ public class IdentityDocumentService : IIdentityDocumentService
             existing.ExpirationDate = model.ExpirationDate;
             existing.DocumentType = model.DocumentType;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "IdentityDocument",
                 "UpdateIdentityDocument",
                 () => _repository.UpdateAsync(existing, cancellationToken));

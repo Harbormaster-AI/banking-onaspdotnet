@@ -74,7 +74,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
             existing.TotalDue = model.TotalDue;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "RepaymentSchedule",
                 "UpdateRepaymentSchedule",
                 () => _repository.UpdateAsync(existing, cancellationToken));

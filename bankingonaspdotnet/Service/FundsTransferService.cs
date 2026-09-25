@@ -82,7 +82,7 @@ public class FundsTransferService : IFundsTransferService
             existing.Method = model.Method;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "FundsTransfer",
                 "UpdateFundsTransfer",
                 () => _repository.UpdateAsync(existing, cancellationToken));

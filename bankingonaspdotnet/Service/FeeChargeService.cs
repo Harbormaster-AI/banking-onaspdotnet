@@ -72,7 +72,7 @@ public class FeeChargeService : IFeeChargeService
             existing.AppliedOn = model.AppliedOn;
             existing.FeeType = model.FeeType;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "FeeCharge",
                 "UpdateFeeCharge",
                 () => _repository.UpdateAsync(existing, cancellationToken));

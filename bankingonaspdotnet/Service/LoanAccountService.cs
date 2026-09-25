@@ -92,7 +92,7 @@ public class LoanAccountService : ILoanAccountService
             existing.Compounding = model.Compounding;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "LoanAccount",
                 "UpdateLoanAccount",
                 () => _repository.UpdateAsync(existing, cancellationToken));

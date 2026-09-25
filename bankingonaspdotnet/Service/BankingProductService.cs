@@ -76,7 +76,7 @@ public class BankingProductService : IBankingProductService
             existing.Description = model.Description;
             existing.ProductCategory = model.ProductCategory;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "BankingProduct",
                 "UpdateBankingProduct",
                 () => _repository.UpdateAsync(existing, cancellationToken));

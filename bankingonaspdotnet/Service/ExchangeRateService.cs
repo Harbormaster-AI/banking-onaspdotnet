@@ -73,7 +73,7 @@ public class ExchangeRateService : IExchangeRateService
             existing.AsOf = model.AsOf;
             existing.Source = model.Source;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ExchangeRate",
                 "UpdateExchangeRate",
                 () => _repository.UpdateAsync(existing, cancellationToken));

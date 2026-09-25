@@ -93,7 +93,7 @@ public class CustomerService : ICustomerService
             existing.RiskRating = model.RiskRating;
             existing.KycStatus = model.KycStatus;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Customer",
                 "UpdateCustomer",
                 () => _repository.UpdateAsync(existing, cancellationToken));

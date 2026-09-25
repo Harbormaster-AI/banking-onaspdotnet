@@ -84,7 +84,7 @@ public class TransactionService : ITransactionService
             existing.Status = model.Status;
             existing.Channel = model.Channel;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Transaction",
                 "UpdateTransaction",
                 () => _repository.UpdateAsync(existing, cancellationToken));

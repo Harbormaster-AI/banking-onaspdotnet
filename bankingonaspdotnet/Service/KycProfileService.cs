@@ -75,7 +75,7 @@ public class KycProfileService : IKycProfileService
             existing.LastReviewedOn = model.LastReviewedOn;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "KycProfile",
                 "UpdateKycProfile",
                 () => _repository.UpdateAsync(existing, cancellationToken));

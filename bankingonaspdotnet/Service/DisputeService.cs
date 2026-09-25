@@ -76,7 +76,7 @@ public class DisputeService : IDisputeService
             existing.Reason = model.Reason;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Dispute",
                 "UpdateDispute",
                 () => _repository.UpdateAsync(existing, cancellationToken));

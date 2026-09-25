@@ -89,7 +89,7 @@ public class AccountService : IAccountService
             existing.OwnershipType = model.OwnershipType;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Account",
                 "UpdateAccount",
                 () => _repository.UpdateAsync(existing, cancellationToken));

@@ -71,7 +71,7 @@ public class CollateralService : ICollateralService
             existing.Location = model.Location;
             existing.CollateralType = model.CollateralType;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Collateral",
                 "UpdateCollateral",
                 () => _repository.UpdateAsync(existing, cancellationToken));

@@ -69,7 +69,7 @@ public class ScreeningResultService : IScreeningResultService
             existing.Provider = model.Provider;
             existing.Outcome = model.Outcome;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "ScreeningResult",
                 "UpdateScreeningResult",
                 () => _repository.UpdateAsync(existing, cancellationToken));

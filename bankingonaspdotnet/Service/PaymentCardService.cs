@@ -79,7 +79,7 @@ public class PaymentCardService : IPaymentCardService
             existing.CardStatus = model.CardStatus;
             existing.Network = model.Network;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "PaymentCard",
                 "UpdatePaymentCard",
                 () => _repository.UpdateAsync(existing, cancellationToken));

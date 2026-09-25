@@ -76,7 +76,7 @@ public class ConsentService : IConsentService
             existing.ConsentType = model.ConsentType;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Consent",
                 "UpdateConsent",
                 () => _repository.UpdateAsync(existing, cancellationToken));

@@ -83,7 +83,7 @@ public class FXTradeService : IFXTradeService
             existing.Rate = model.Rate;
             existing.Status = model.Status;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "FXTrade",
                 "UpdateFXTrade",
                 () => _repository.UpdateAsync(existing, cancellationToken));

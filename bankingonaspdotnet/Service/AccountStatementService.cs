@@ -72,7 +72,7 @@ public class AccountStatementService : IAccountStatementService
             existing.ClosingBalance = model.ClosingBalance;
             existing.DeliveryMethod = model.DeliveryMethod;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "AccountStatement",
                 "UpdateAccountStatement",
                 () => _repository.UpdateAsync(existing, cancellationToken));

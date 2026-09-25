@@ -87,7 +87,7 @@ public class BankService : IBankService
             existing.HeadquartersCountry = model.HeadquartersCountry;
             existing.Website = model.Website;
 
-            return await _telemetry.Execute(
+            await _telemetry.Execute(
                 "Bank",
                 "UpdateBank",
                 () => _repository.UpdateAsync(existing, cancellationToken));
