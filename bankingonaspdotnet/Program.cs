@@ -167,6 +167,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     builder.Services.AddScoped<IConsentService, ConsentService>();
     builder.Services.AddScoped<IThirdPartyProviderService, ThirdPartyProviderService>();
 
+// apply the service resolver
+builder.Services.AddScoped<IServiceResolver, ServiceResolver>();
+
 builder.Services.AddSingleton<ApplicationTelemetry>();
 
 builder.Services
@@ -182,8 +185,6 @@ var app = builder.Build();
 
 app.MapPrometheusScrapingEndpoint();
 
-// apply the service resolver
-builder.Services.AddScoped<IServiceResolver, ServiceResolver>();
 
 // Health endpoint
 app.MapHealthChecks("/health");
