@@ -135,7 +135,7 @@ public class BranchService : IBranchService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(BankService).Get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }

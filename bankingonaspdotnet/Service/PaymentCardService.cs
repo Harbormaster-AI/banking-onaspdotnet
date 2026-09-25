@@ -137,7 +137,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(BankService).Get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
@@ -186,7 +186,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -235,7 +235,7 @@ public class PaymentCardService : IPaymentCardService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(CustomerService).Get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }

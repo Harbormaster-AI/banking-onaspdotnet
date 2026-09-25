@@ -142,7 +142,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -191,7 +191,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(ExternalAccountService).Get( childRequest , cancellationToken );
             parent.ExternalCounterparty = child;
             Update( parent );
         }
@@ -240,7 +240,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(PaymentCardService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(PaymentCardService).Get( childRequest , cancellationToken );
             parent.PaymentCard = child;
             Update( parent );
         }
@@ -289,7 +289,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(FundsTransferService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(FundsTransferService).Get( childRequest , cancellationToken );
             parent.FundsTransfer = child;
             Update( parent );
         }
@@ -338,7 +338,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(FXTradeService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(FXTradeService).Get( childRequest , cancellationToken );
             parent.FxTrade = child;
             Update( parent );
         }
@@ -387,7 +387,7 @@ public class TransactionService : ITransactionService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(DisputeService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(DisputeService).Get( childRequest , cancellationToken );
             parent.Dispute = child;
             Update( parent );
         }

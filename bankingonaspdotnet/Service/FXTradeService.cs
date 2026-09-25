@@ -141,7 +141,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(CustomerService).Get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
@@ -190,7 +190,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(BankService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(BankService).Get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
@@ -239,7 +239,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(ExchangeRateService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(ExchangeRateService).Get( childRequest , cancellationToken );
             parent.ExchangeRate = child;
             Update( parent );
         }
@@ -288,7 +288,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
             parent.SourceAccount = child;
             Update( parent );
         }
@@ -337,7 +337,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(AccountService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(AccountService).Get( childRequest , cancellationToken );
             parent.DestinationAccount = child;
             Update( parent );
         }
@@ -386,7 +386,7 @@ public class FXTradeService : IFXTradeService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(TransactionService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(TransactionService).Get( childRequest , cancellationToken );
             parent.Transaction = child;
             Update( parent );
         }

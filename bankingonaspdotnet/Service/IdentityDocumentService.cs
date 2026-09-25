@@ -128,7 +128,7 @@ public class IdentityDocumentService : IIdentityDocumentService
                 Id = request.ChildId,
             };
 
-            var child = _serviceResolver.get(KycProfileService).get( childRequest , cancellationToken );
+            var child = _serviceResolver.Get(KycProfileService).Get( childRequest , cancellationToken );
             parent.KycProfile = child;
             Update( parent );
         }
