@@ -148,7 +148,7 @@ public class FundsTransferService : IFundsTransferService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.SourceAccount = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -171,7 +171,7 @@ public class FundsTransferService : IFundsTransferService
         try
         {
             parent.SourceAccount = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -201,7 +201,7 @@ public class FundsTransferService : IFundsTransferService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.DestinationAccount = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -224,7 +224,7 @@ public class FundsTransferService : IFundsTransferService
         try
         {
             parent.DestinationAccount = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -254,7 +254,7 @@ public class FundsTransferService : IFundsTransferService
 
             var child = await _serviceResolver.Get<ExternalAccountService>().Get(childRequest, cancellationToken);
             parent.ExternalBeneficiary = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -277,7 +277,7 @@ public class FundsTransferService : IFundsTransferService
         try
         {
             parent.ExternalBeneficiary = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -307,7 +307,7 @@ public class FundsTransferService : IFundsTransferService
 
             var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.InitiatedBy = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -330,7 +330,7 @@ public class FundsTransferService : IFundsTransferService
         try
         {
             parent.InitiatedBy = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

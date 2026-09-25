@@ -150,7 +150,7 @@ public class TransactionService : ITransactionService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -173,7 +173,7 @@ public class TransactionService : ITransactionService
         try
         {
             parent.Account = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -203,7 +203,7 @@ public class TransactionService : ITransactionService
 
             var child = await _serviceResolver.Get<ExternalAccountService>().Get(childRequest, cancellationToken);
             parent.ExternalCounterparty = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -226,7 +226,7 @@ public class TransactionService : ITransactionService
         try
         {
             parent.ExternalCounterparty = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -256,7 +256,7 @@ public class TransactionService : ITransactionService
 
             var child = await _serviceResolver.Get<PaymentCardService>().Get(childRequest, cancellationToken);
             parent.PaymentCard = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -279,7 +279,7 @@ public class TransactionService : ITransactionService
         try
         {
             parent.PaymentCard = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -309,7 +309,7 @@ public class TransactionService : ITransactionService
 
             var child = await _serviceResolver.Get<FundsTransferService>().Get(childRequest, cancellationToken);
             parent.FundsTransfer = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -332,7 +332,7 @@ public class TransactionService : ITransactionService
         try
         {
             parent.FundsTransfer = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -362,7 +362,7 @@ public class TransactionService : ITransactionService
 
             var child = await _serviceResolver.Get<FXTradeService>().Get(childRequest, cancellationToken);
             parent.FxTrade = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -385,7 +385,7 @@ public class TransactionService : ITransactionService
         try
         {
             parent.FxTrade = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -415,7 +415,7 @@ public class TransactionService : ITransactionService
 
             var child = await _serviceResolver.Get<DisputeService>().Get(childRequest, cancellationToken);
             parent.Dispute = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -438,7 +438,7 @@ public class TransactionService : ITransactionService
         try
         {
             parent.Dispute = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

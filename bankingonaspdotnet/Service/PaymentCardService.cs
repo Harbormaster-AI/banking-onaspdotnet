@@ -145,7 +145,7 @@ public class PaymentCardService : IPaymentCardService
 
             var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -168,7 +168,7 @@ public class PaymentCardService : IPaymentCardService
         try
         {
             parent.Bank = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -198,7 +198,7 @@ public class PaymentCardService : IPaymentCardService
 
             var child = await _serviceResolver.Get<AccountService>().Get(childRequest, cancellationToken);
             parent.Account = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -221,7 +221,7 @@ public class PaymentCardService : IPaymentCardService
         try
         {
             parent.Account = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -251,7 +251,7 @@ public class PaymentCardService : IPaymentCardService
 
             var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -274,7 +274,7 @@ public class PaymentCardService : IPaymentCardService
         try
         {
             parent.Customer = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

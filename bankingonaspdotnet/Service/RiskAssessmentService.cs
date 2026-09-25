@@ -135,7 +135,7 @@ public class RiskAssessmentService : IRiskAssessmentService
 
             var child = await _serviceResolver.Get<KycProfileService>().Get(childRequest, cancellationToken);
             parent.KycProfile = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -158,7 +158,7 @@ public class RiskAssessmentService : IRiskAssessmentService
         try
         {
             parent.KycProfile = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

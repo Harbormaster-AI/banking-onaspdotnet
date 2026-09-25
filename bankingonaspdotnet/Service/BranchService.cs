@@ -143,7 +143,7 @@ public class BranchService : IBranchService
 
             var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -166,7 +166,7 @@ public class BranchService : IBranchService
         try
         {
             parent.Bank = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

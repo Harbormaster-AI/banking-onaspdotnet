@@ -142,7 +142,7 @@ public class ConsentService : IConsentService
 
             var child = await _serviceResolver.Get<CustomerService>().Get(childRequest, cancellationToken);
             parent.Customer = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -165,7 +165,7 @@ public class ConsentService : IConsentService
         try
         {
             parent.Customer = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -195,7 +195,7 @@ public class ConsentService : IConsentService
 
             var child = await _serviceResolver.Get<BankService>().Get(childRequest, cancellationToken);
             parent.Bank = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -218,7 +218,7 @@ public class ConsentService : IConsentService
         try
         {
             parent.Bank = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -248,7 +248,7 @@ public class ConsentService : IConsentService
 
             var child = await _serviceResolver.Get<ThirdPartyProviderService>().Get(childRequest, cancellationToken);
             parent.ThirdPartyProvider = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -271,7 +271,7 @@ public class ConsentService : IConsentService
         try
         {
             parent.ThirdPartyProvider = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {

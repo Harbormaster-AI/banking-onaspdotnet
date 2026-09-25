@@ -136,7 +136,7 @@ public class IdentityDocumentService : IIdentityDocumentService
 
             var child = await _serviceResolver.Get<KycProfileService>().Get(childRequest, cancellationToken);
             parent.KycProfile = child;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
@@ -159,7 +159,7 @@ public class IdentityDocumentService : IIdentityDocumentService
         try
         {
             parent.KycProfile = null;
-            Update( parent );
+            Update( parent, cancellationToken );
         }
         catch (Exception ex)
         {
