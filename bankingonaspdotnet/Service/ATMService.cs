@@ -128,7 +128,7 @@ public class ATMService : IATMService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BranchService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(BranchService).get( childRequest , cancellationToken );
             parent.Branch = child;
             Update( parent );
         }

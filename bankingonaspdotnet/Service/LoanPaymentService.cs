@@ -132,7 +132,7 @@ public class LoanPaymentService : ILoanPaymentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }
@@ -181,7 +181,7 @@ public class LoanPaymentService : ILoanPaymentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(TransactionService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(TransactionService).get( childRequest , cancellationToken );
             parent.Transaction = child;
             Update( parent );
         }

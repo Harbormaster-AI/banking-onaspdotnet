@@ -141,7 +141,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.SourceAccount = child;
             Update( parent );
         }
@@ -190,7 +190,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.DestinationAccount = child;
             Update( parent );
         }
@@ -239,7 +239,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
             parent.ExternalBeneficiary = child;
             Update( parent );
         }
@@ -288,7 +288,7 @@ public class FundsTransferService : IFundsTransferService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.InitiatedBy = child;
             Update( parent );
         }

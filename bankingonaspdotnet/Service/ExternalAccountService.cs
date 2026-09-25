@@ -133,7 +133,7 @@ public class ExternalAccountService : IExternalAccountService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }

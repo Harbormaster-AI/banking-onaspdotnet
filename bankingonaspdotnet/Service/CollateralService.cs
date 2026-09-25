@@ -130,7 +130,7 @@ public class CollateralService : ICollateralService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }

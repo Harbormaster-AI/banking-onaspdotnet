@@ -130,7 +130,7 @@ public class ThirdPartyProviderService : IThirdPartyProviderService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }

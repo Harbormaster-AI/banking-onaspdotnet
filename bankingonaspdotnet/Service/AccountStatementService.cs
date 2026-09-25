@@ -131,7 +131,7 @@ public class AccountStatementService : IAccountStatementService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }

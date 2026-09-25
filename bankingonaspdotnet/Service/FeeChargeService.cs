@@ -131,7 +131,7 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -180,7 +180,7 @@ public class FeeChargeService : IFeeChargeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken );
             parent.LoanAccount = child;
             Update( parent );
         }

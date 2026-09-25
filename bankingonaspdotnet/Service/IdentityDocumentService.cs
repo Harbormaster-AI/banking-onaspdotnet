@@ -129,7 +129,7 @@ public class IdentityDocumentService : IIdentityDocumentService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken );
             parent.KycProfile = child;
             Update( parent );
         }

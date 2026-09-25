@@ -132,7 +132,7 @@ public class StandingInstructionService : IStandingInstructionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -181,7 +181,7 @@ public class StandingInstructionService : IStandingInstructionService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken );
             parent.Beneficiary = child;
             Update( parent );
         }

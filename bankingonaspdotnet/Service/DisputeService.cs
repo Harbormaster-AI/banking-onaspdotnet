@@ -135,7 +135,7 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(TransactionService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(TransactionService).get( childRequest , cancellationToken );
             parent.Transaction = child;
             Update( parent );
         }
@@ -184,7 +184,7 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken );
             parent.Customer = child;
             Update( parent );
         }
@@ -233,7 +233,7 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken );
             parent.Account = child;
             Update( parent );
         }
@@ -282,7 +282,7 @@ public class DisputeService : IDisputeService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(PaymentCardService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(PaymentCardService).get( childRequest , cancellationToken );
             parent.PaymentCard = child;
             Update( parent );
         }

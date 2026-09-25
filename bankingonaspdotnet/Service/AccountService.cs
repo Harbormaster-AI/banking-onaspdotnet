@@ -148,7 +148,7 @@ public class AccountService : IAccountService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(BankService).get( childRequest , cancellationToken );
             parent.Bank = child;
             Update( parent );
         }
@@ -197,7 +197,7 @@ public class AccountService : IAccountService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BranchService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(BranchService).get( childRequest , cancellationToken );
             parent.Branch = child;
             Update( parent );
         }
@@ -246,7 +246,7 @@ public class AccountService : IAccountService
                 Id = request.ChildId,
             };
 
-            var child = serviceResolver.get(BankingProductService).get( childRequest , cancellationToken )
+            var child = serviceResolver.get(BankingProductService).get( childRequest , cancellationToken );
             parent.Product = child;
             Update( parent );
         }
