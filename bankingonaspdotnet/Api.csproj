@@ -39,6 +39,7 @@
             Include="OpenTelemetry.Extensions.Hosting"
             Version="1.19.1" />
 
+    <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.19.1-beta.1" />
 
   </ItemGroup>
 
