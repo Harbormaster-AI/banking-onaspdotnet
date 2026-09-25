@@ -52,25 +52,39 @@ public class ConsentRepository : IConsentRepository
         await _db.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task AddToAuthorizedAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToAuthorizedAccountsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.AuthorizedAccounts
-            .Where(account => request.ChildIds.Contains(account.Id))
+            .Where(account =>
+                request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    account => account.AuthorizedAccounts_Id,
+                    account =>
+                        EF.Property<Guid?>(
+                            account,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromAuthorizedAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromAuthorizedAccountsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.AuthorizedAccounts
             .Where(account =>
                 request.ChildIds.Contains(account.Id) &&
-                account.AuthorizedAccounts_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    account,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    account => account.AuthorizedAccounts_Id,
+                    account =>
+                        EF.Property<Guid?>(
+                            account,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 

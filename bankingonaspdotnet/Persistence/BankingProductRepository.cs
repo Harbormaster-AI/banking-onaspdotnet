@@ -48,69 +48,111 @@ public class BankingProductRepository : IBankingProductRepository
         await _db.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task AddToAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToAccountsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Accounts
-            .Where(account => request.ChildIds.Contains(account.Id))
+            .Where(account =>
+                request.ChildIds.Contains(account.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    account => account.Accounts_Id,
+                    account =>
+                        EF.Property<Guid?>(
+                            account,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromAccountsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Accounts
             .Where(account =>
                 request.ChildIds.Contains(account.Id) &&
-                account.Accounts_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    account,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    account => account.Accounts_Id,
+                    account =>
+                        EF.Property<Guid?>(
+                            account,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
-    public async Task AddToLoanAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToLoanAccountsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.LoanAccounts
-            .Where(loanAccount => request.ChildIds.Contains(loanAccount.Id))
+            .Where(loanAccount =>
+                request.ChildIds.Contains(loanAccount.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    loanAccount => loanAccount.LoanAccounts_Id,
+                    loanAccount =>
+                        EF.Property<Guid?>(
+                            loanAccount,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromLoanAccountsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromLoanAccountsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.LoanAccounts
             .Where(loanAccount =>
                 request.ChildIds.Contains(loanAccount.Id) &&
-                loanAccount.LoanAccounts_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    loanAccount,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    loanAccount => loanAccount.LoanAccounts_Id,
+                    loanAccount =>
+                        EF.Property<Guid?>(
+                            loanAccount,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
-    public async Task AddToPaymentCardsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToPaymentCardsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.PaymentCards
-            .Where(paymentCard => request.ChildIds.Contains(paymentCard.Id))
+            .Where(paymentCard =>
+                request.ChildIds.Contains(paymentCard.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    paymentCard => paymentCard.PaymentCards_Id,
+                    paymentCard =>
+                        EF.Property<Guid?>(
+                            paymentCard,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromPaymentCardsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromPaymentCardsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.PaymentCards
             .Where(paymentCard =>
                 request.ChildIds.Contains(paymentCard.Id) &&
-                paymentCard.PaymentCards_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    paymentCard,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    paymentCard => paymentCard.PaymentCards_Id,
+                    paymentCard =>
+                        EF.Property<Guid?>(
+                            paymentCard,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 

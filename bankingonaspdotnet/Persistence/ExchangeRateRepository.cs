@@ -48,25 +48,39 @@ public class ExchangeRateRepository : IExchangeRateRepository
         await _db.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task AddToFxTradesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToFxTradesAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.FxTrades
-            .Where(fXTrade => request.ChildIds.Contains(fXTrade.Id))
+            .Where(fXTrade =>
+                request.ChildIds.Contains(fXTrade.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    fXTrade => fXTrade.FxTrades_Id,
+                    fXTrade =>
+                        EF.Property<Guid?>(
+                            fXTrade,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromFxTradesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromFxTradesAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.FxTrades
             .Where(fXTrade =>
                 request.ChildIds.Contains(fXTrade.Id) &&
-                fXTrade.FxTrades_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    fXTrade,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    fXTrade => fXTrade.FxTrades_Id,
+                    fXTrade =>
+                        EF.Property<Guid?>(
+                            fXTrade,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 

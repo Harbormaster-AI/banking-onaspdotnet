@@ -52,25 +52,39 @@ public class PaymentCardRepository : IPaymentCardRepository
         await _db.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task AddToTransactionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToTransactionsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Transactions
-            .Where(transaction => request.ChildIds.Contains(transaction.Id))
+            .Where(transaction =>
+                request.ChildIds.Contains(transaction.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    transaction => transaction.Transactions_Id,
+                    transaction =>
+                        EF.Property<Guid?>(
+                            transaction,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromTransactionsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromTransactionsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Transactions
             .Where(transaction =>
                 request.ChildIds.Contains(transaction.Id) &&
-                transaction.Transactions_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    transaction,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    transaction => transaction.Transactions_Id,
+                    transaction =>
+                        EF.Property<Guid?>(
+                            transaction,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 

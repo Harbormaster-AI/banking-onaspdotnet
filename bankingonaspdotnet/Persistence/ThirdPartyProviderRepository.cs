@@ -48,25 +48,39 @@ public class ThirdPartyProviderRepository : IThirdPartyProviderRepository
         await _db.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task AddToConsentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToConsentsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Consents
-            .Where(consent => request.ChildIds.Contains(consent.Id))
+            .Where(consent =>
+                request.ChildIds.Contains(consent.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    consent => consent.Consents_Id,
+                    consent =>
+                        EF.Property<Guid?>(
+                            consent,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromConsentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromConsentsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Consents
             .Where(consent =>
                 request.ChildIds.Contains(consent.Id) &&
-                consent.Consents_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    consent,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    consent => consent.Consents_Id,
+                    consent =>
+                        EF.Property<Guid?>(
+                            consent,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 

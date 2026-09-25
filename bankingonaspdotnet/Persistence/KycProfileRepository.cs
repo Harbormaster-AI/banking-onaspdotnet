@@ -48,69 +48,111 @@ public class KycProfileRepository : IKycProfileRepository
         await _db.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task AddToIdentityDocumentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToIdentityDocumentsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.IdentityDocuments
-            .Where(identityDocument => request.ChildIds.Contains(identityDocument.Id))
+            .Where(identityDocument =>
+                request.ChildIds.Contains(identityDocument.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    identityDocument => identityDocument.IdentityDocuments_Id,
+                    identityDocument =>
+                        EF.Property<Guid?>(
+                            identityDocument,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromIdentityDocumentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromIdentityDocumentsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.IdentityDocuments
             .Where(identityDocument =>
                 request.ChildIds.Contains(identityDocument.Id) &&
-                identityDocument.IdentityDocuments_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    identityDocument,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    identityDocument => identityDocument.IdentityDocuments_Id,
+                    identityDocument =>
+                        EF.Property<Guid?>(
+                            identityDocument,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
-    public async Task AddToRiskAssessmentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToRiskAssessmentsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.RiskAssessments
-            .Where(riskAssessment => request.ChildIds.Contains(riskAssessment.Id))
+            .Where(riskAssessment =>
+                request.ChildIds.Contains(riskAssessment.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    riskAssessment => riskAssessment.RiskAssessments_Id,
+                    riskAssessment =>
+                        EF.Property<Guid?>(
+                            riskAssessment,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromRiskAssessmentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromRiskAssessmentsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.RiskAssessments
             .Where(riskAssessment =>
                 request.ChildIds.Contains(riskAssessment.Id) &&
-                riskAssessment.RiskAssessments_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    riskAssessment,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    riskAssessment => riskAssessment.RiskAssessments_Id,
+                    riskAssessment =>
+                        EF.Property<Guid?>(
+                            riskAssessment,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
-    public async Task AddToScreeningsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToScreeningsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Screenings
-            .Where(screeningResult => request.ChildIds.Contains(screeningResult.Id))
+            .Where(screeningResult =>
+                request.ChildIds.Contains(screeningResult.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    screeningResult => screeningResult.Screenings_Id,
+                    screeningResult =>
+                        EF.Property<Guid?>(
+                            screeningResult,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromScreeningsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromScreeningsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Screenings
             .Where(screeningResult =>
                 request.ChildIds.Contains(screeningResult.Id) &&
-                screeningResult.Screenings_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    screeningResult,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    screeningResult => screeningResult.Screenings_Id,
+                    screeningResult =>
+                        EF.Property<Guid?>(
+                            screeningResult,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 

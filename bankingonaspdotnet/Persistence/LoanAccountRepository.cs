@@ -52,113 +52,183 @@ public class LoanAccountRepository : ILoanAccountRepository
         await _db.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task AddToBorrowersAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToBorrowersAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Borrowers
-            .Where(customer => request.ChildIds.Contains(customer.Id))
+            .Where(customer =>
+                request.ChildIds.Contains(customer.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    customer => customer.Borrowers_Id,
+                    customer =>
+                        EF.Property<Guid?>(
+                            customer,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromBorrowersAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromBorrowersAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Borrowers
             .Where(customer =>
                 request.ChildIds.Contains(customer.Id) &&
-                customer.Borrowers_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    customer,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    customer => customer.Borrowers_Id,
+                    customer =>
+                        EF.Property<Guid?>(
+                            customer,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
-    public async Task AddToRepaymentScheduleAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToRepaymentScheduleAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.RepaymentSchedule
-            .Where(repaymentSchedule => request.ChildIds.Contains(repaymentSchedule.Id))
+            .Where(repaymentSchedule =>
+                request.ChildIds.Contains(repaymentSchedule.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    repaymentSchedule => repaymentSchedule.RepaymentSchedule_Id,
+                    repaymentSchedule =>
+                        EF.Property<Guid?>(
+                            repaymentSchedule,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromRepaymentScheduleAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromRepaymentScheduleAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.RepaymentSchedule
             .Where(repaymentSchedule =>
                 request.ChildIds.Contains(repaymentSchedule.Id) &&
-                repaymentSchedule.RepaymentSchedule_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    repaymentSchedule,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    repaymentSchedule => repaymentSchedule.RepaymentSchedule_Id,
+                    repaymentSchedule =>
+                        EF.Property<Guid?>(
+                            repaymentSchedule,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
-    public async Task AddToPaymentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToPaymentsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Payments
-            .Where(loanPayment => request.ChildIds.Contains(loanPayment.Id))
+            .Where(loanPayment =>
+                request.ChildIds.Contains(loanPayment.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    loanPayment => loanPayment.Payments_Id,
+                    loanPayment =>
+                        EF.Property<Guid?>(
+                            loanPayment,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromPaymentsAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromPaymentsAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Payments
             .Where(loanPayment =>
                 request.ChildIds.Contains(loanPayment.Id) &&
-                loanPayment.Payments_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    loanPayment,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    loanPayment => loanPayment.Payments_Id,
+                    loanPayment =>
+                        EF.Property<Guid?>(
+                            loanPayment,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
-    public async Task AddToCollateralAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToCollateralAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Collateral
-            .Where(collateral => request.ChildIds.Contains(collateral.Id))
+            .Where(collateral =>
+                request.ChildIds.Contains(collateral.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    collateral => collateral.Collateral_Id,
+                    collateral =>
+                        EF.Property<Guid?>(
+                            collateral,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromCollateralAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromCollateralAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.Collateral
             .Where(collateral =>
                 request.ChildIds.Contains(collateral.Id) &&
-                collateral.Collateral_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    collateral,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    collateral => collateral.Collateral_Id,
+                    collateral =>
+                        EF.Property<Guid?>(
+                            collateral,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
-    public async Task AddToFeeChargesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+
+    public async Task AddToFeeChargesAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.FeeCharges
-            .Where(feeCharge => request.ChildIds.Contains(feeCharge.Id))
+            .Where(feeCharge =>
+                request.ChildIds.Contains(feeCharge.Id))
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    feeCharge => feeCharge.FeeCharges_Id,
+                    feeCharge =>
+                        EF.Property<Guid?>(
+                            feeCharge,
+                            "ThirdPartyProvider_Id"),
                     request.ParentId));
     }
 
-    public async Task RemoveFromFeeChargesAsync( MultipleAssociationRequest request, CancellationToken cancellationToken)
+    public async Task RemoveFromFeeChargesAsync(
+        MultipleAssociationRequest request,
+        CancellationToken cancellationToken)
     {
         await _db.FeeCharges
             .Where(feeCharge =>
                 request.ChildIds.Contains(feeCharge.Id) &&
-                feeCharge.FeeCharges_Id == request.ParentId)
+                EF.Property<Guid?>(
+                    feeCharge,
+                    "ThirdPartyProvider_Id") == request.ParentId)
             .ExecuteUpdateAsync(setters =>
                 setters.SetProperty(
-                    feeCharge => feeCharge.FeeCharges_Id,
+                    feeCharge =>
+                        EF.Property<Guid?>(
+                            feeCharge,
+                            "ThirdPartyProvider_Id"),
                     (Guid?)null));
     }
 
