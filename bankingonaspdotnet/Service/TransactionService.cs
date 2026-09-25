@@ -140,7 +140,7 @@ public class TransactionService : ITransactionService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
@@ -189,7 +189,7 @@ public class TransactionService : ITransactionService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken )
@@ -238,7 +238,7 @@ public class TransactionService : ITransactionService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(PaymentCardService).get( childRequest , cancellationToken )
@@ -287,7 +287,7 @@ public class TransactionService : ITransactionService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(FundsTransferService).get( childRequest , cancellationToken )
@@ -336,7 +336,7 @@ public class TransactionService : ITransactionService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(FXTradeService).get( childRequest , cancellationToken )
@@ -385,7 +385,7 @@ public class TransactionService : ITransactionService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(DisputeService).get( childRequest , cancellationToken )

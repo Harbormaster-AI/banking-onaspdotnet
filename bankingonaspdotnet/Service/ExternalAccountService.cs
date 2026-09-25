@@ -130,7 +130,7 @@ public class ExternalAccountService : IExternalAccountService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken )

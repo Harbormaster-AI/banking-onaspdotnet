@@ -130,7 +130,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken )
@@ -179,7 +179,7 @@ public class RepaymentScheduleService : IRepaymentScheduleService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(LoanPaymentService).get( childRequest , cancellationToken )

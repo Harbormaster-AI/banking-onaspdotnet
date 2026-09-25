@@ -148,7 +148,7 @@ public class LoanAccountService : ILoanAccountService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(BankService).get( childRequest , cancellationToken )
@@ -197,7 +197,7 @@ public class LoanAccountService : ILoanAccountService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(BranchService).get( childRequest , cancellationToken )
@@ -246,7 +246,7 @@ public class LoanAccountService : ILoanAccountService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(BankingProductService).get( childRequest , cancellationToken )

@@ -138,7 +138,7 @@ public class FundsTransferService : IFundsTransferService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
@@ -187,7 +187,7 @@ public class FundsTransferService : IFundsTransferService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
@@ -236,7 +236,7 @@ public class FundsTransferService : IFundsTransferService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken )
@@ -285,7 +285,7 @@ public class FundsTransferService : IFundsTransferService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken )

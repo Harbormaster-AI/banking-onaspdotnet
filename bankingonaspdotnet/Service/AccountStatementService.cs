@@ -128,7 +128,7 @@ public class AccountStatementService : IAccountStatementService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )

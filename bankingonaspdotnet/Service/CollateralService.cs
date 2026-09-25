@@ -127,7 +127,7 @@ public class CollateralService : ICollateralService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken )

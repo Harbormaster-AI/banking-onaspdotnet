@@ -125,7 +125,7 @@ public class ATMService : IATMService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(BranchService).get( childRequest , cancellationToken )

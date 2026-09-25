@@ -128,7 +128,7 @@ public class FeeChargeService : IFeeChargeService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
@@ -177,7 +177,7 @@ public class FeeChargeService : IFeeChargeService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(LoanAccountService).get( childRequest , cancellationToken )

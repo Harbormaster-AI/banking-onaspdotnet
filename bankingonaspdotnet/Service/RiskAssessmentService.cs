@@ -125,7 +125,7 @@ public class RiskAssessmentService : IRiskAssessmentService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(KycProfileService).get( childRequest , cancellationToken )

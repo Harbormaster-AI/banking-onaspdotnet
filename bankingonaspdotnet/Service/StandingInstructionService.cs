@@ -129,7 +129,7 @@ public class StandingInstructionService : IStandingInstructionService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(AccountService).get( childRequest , cancellationToken )
@@ -178,7 +178,7 @@ public class StandingInstructionService : IStandingInstructionService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(ExternalAccountService).get( childRequest , cancellationToken )

@@ -149,7 +149,7 @@ public class CustomerService : ICustomerService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(BankService).get( childRequest , cancellationToken )

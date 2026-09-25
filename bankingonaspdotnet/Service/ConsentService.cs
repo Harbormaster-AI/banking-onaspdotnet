@@ -132,7 +132,7 @@ public class ConsentService : IConsentService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(CustomerService).get( childRequest , cancellationToken )
@@ -181,7 +181,7 @@ public class ConsentService : IConsentService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(BankService).get( childRequest , cancellationToken )
@@ -230,7 +230,7 @@ public class ConsentService : IConsentService
         {
             var childRequest = new IdentifierRequest
             {
-                Id = request.ChildId;
+                Id = request.ChildId,
             };
 
             var child = serviceResolver.get(ThirdPartyProviderService).get( childRequest , cancellationToken )
